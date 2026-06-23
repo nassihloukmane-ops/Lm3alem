@@ -44,10 +44,6 @@ export const metadata: Metadata = {
   publisher: "lm3alem",
   alternates: {
     canonical: "https://lm3alem.ma",
-    languages: {
-      "fr-MA": "https://lm3alem.ma",
-      "ar-MA": "https://lm3alem.ma/ar",
-    },
   },
   openGraph: {
     type: "website",
@@ -89,9 +85,6 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.svg",
   },
   manifest: "/site.webmanifest",
-  verification: {
-    google: "YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE",
-  },
 };
 
 export default function RootLayout({
@@ -101,10 +94,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr-MA" dir="ltr" className={`${inter.variable} ${notoArabic.variable}`}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
       <body className="font-sans">{children}</body>
     </html>
   );

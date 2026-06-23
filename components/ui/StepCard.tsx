@@ -1,7 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
-import { FadeInView } from "@/components/ui/motion-lazy";
 
 interface StepCardProps {
   step: number;
@@ -13,7 +13,7 @@ interface StepCardProps {
 
 export function StepCard({ step, icon: Icon, title, description, index }: StepCardProps) {
   return (
-    <FadeInView
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -30,6 +30,6 @@ export function StepCard({ step, icon: Icon, title, description, index }: StepCa
       </div>
       <h3 className="mb-2 text-lg font-bold text-teal">{title}</h3>
       <p className="text-sm text-teal/60 leading-relaxed max-w-[220px]">{description}</p>
-    </FadeInView>
+    </motion.div>
   );
 }

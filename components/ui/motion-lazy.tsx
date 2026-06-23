@@ -1,59 +1,26 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { type HTMLMotionProps } from "framer-motion";
-import { type ReactNode, useEffect, useState } from "react";
-
-const MotionDiv = dynamic(
-  () => import("framer-motion").then((m) => m.motion.div),
-  { ssr: false }
-);
-
-const MotionHeader = dynamic(
-  () => import("framer-motion").then((m) => m.motion.header),
-  { ssr: false }
-);
-
-export const AnimatePresence = dynamic(
-  () => import("framer-motion").then((m) => m.AnimatePresence),
-  { ssr: false }
-);
+export { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion";
+import type { ReactNode } from "react";
 
 type MotionDivProps = HTMLMotionProps<"div"> & { children?: ReactNode };
 
-export function FadeIn({
-  children,
-  className,
-  ...props
-}: MotionDivProps) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+export const MotionDiv = motion.div;
+export const MotionHeader = motion.header;
 
-  if (!mounted) {
-    return <div className={className}>{children}</div>;
-  }
-
+export function FadeIn({ children, className, ...props }: MotionDivProps) {
   return (
-    <MotionDiv className={className} {...props}>
+    <motion.div className={className} {...props}>
       {children}
-    </MotionDiv>
+    </motion.div>
   );
 }
 
-export function FadeInView({
-  children,
-  className,
-  ...props
-}: MotionDivProps) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) {
-    return <div className={className}>{children}</div>;
-  }
-
+export function FadeInView({ children, className, ...props }: MotionDivProps) {
   return (
-    <MotionDiv
+    <motion.div
       className={className}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -62,8 +29,6 @@ export function FadeInView({
       {...props}
     >
       {children}
-    </MotionDiv>
+    </motion.div>
   );
 }
-
-export { MotionDiv, MotionHeader };

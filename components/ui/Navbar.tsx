@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Wrench, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, MotionDiv } from "@/components/ui/motion-lazy";
 
 const navLinks = [
   { href: "#features", label: "Fonctionnalités" },
@@ -17,23 +17,23 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
           ? "bg-warm-white/90 backdrop-blur-lg shadow-card border-b border-teal/5"
-          : "bg-transparent",
-        mounted && "animate-fade-in-down"
+          : "bg-transparent"
       )}
     >
       <nav
@@ -81,36 +81,14 @@ export function Navbar() {
         </button>
       </nav>
 
-      {mounted ? (
-        <AnimatePresence>
-          {mobileOpen && (
-            <MotionDiv
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-teal/10 bg-warm-white/95 backdrop-blur-lg"
-            >
-              <div className="flex flex-col gap-1 px-4 py-4">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="rounded-lg px-4 py-3 text-sm font-medium text-teal/70 hover:bg-teal/5 hover:text-saffron-dark transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <a href="#download" onClick={() => setMobileOpen(false)} className="mt-2 block">
-                  <Button className="w-full">Télécharger l&apos;App</Button>
-                </a>
-              </div>
-            </MotionDiv>
-          )}
-        </AnimatePresence>
-      ) : (
-        mobileOpen && (
-          <div className="md:hidden border-t border-teal/10 bg-warm-white/95 backdrop-blur-lg">
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-teal/10 bg-warm-white/95 backdrop-blur-lg"
+          >
             <div className="flex flex-col gap-1 px-4 py-4">
               {navLinks.map((link) => (
                 <a
@@ -126,9 +104,9 @@ export function Navbar() {
                 <Button className="w-full">Télécharger l&apos;App</Button>
               </a>
             </div>
-          </div>
-        )
-      )}
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
