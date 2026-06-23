@@ -2,17 +2,16 @@
   "name": "lm3alem",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
   "engines": {
-    "node": ">=18.17.0"
+    "node": "20.x",
+    "npm": ">=9.0.0"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:hostinger": "cross-env HOSTINGER_STATIC=true next build",
-    "build:hostinger-node": "cross-env HOSTINGER_NODE=true next build",
-    "start": "next start",
-    "start:hostinger": "next start -p $PORT",
-    "start:standalone": "node .next/standalone/server.js",
+    "build:static": "cross-env HOSTINGER_STATIC=true next build",
+    "start": "node server.js",
     "lint": "next lint"
   },
   "dependencies": {
