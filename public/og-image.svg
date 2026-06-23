@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0F4C6E"/>
+  <circle cx="200" cy="150" r="3" fill="#F59E0B" opacity="0.3"/>
+  <circle cx="400" cy="300" r="3" fill="#F59E0B" opacity="0.2"/>
+  <circle cx="800" cy="200" r="3" fill="#F59E0B" opacity="0.25"/>
+  <circle cx="1000" cy="450" r="3" fill="#F59E0B" opacity="0.2"/>
+  <rect x="560" y="140" width="80" height="80" rx="20" fill="url(#og)"/>
+  <defs>
+    <linearGradient id="og" x1="560" y1="140" x2="640" y2="220">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <path d="M600 170a4 4 0 0 0 0 5.6l6.4 6.4a4 4 0 0 0 5.6 0l15.2-15.2a24 24 0 0 1-31.6 31.6l-27.6 27.6a8.4 8.4 0 0 1-11.9-11.9l27.6-27.6a24 24 0 0 1 31.6-31.6l-15.2 15.2z" fill="white"/>
+  <text x="600" y="290" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="72" font-weight="800">lm3alem</text>
+  <text x="600" y="360" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="28" opacity="0.9">Trouvez un Artisan qualifié au Maroc</text>
+  <text x="600" y="410" text-anchor="middle" fill="#F59E0B" font-family="system-ui,sans-serif" font-size="24" direction="rtl">,/ 'DE9DE 'DEF'3( AJ +H'FM</text>
+  <text x="600" y="540" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="18" opacity="0.6">=' Plombier  ·  ¡ Électricien  ·  >µ Menuisier</text>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <rect width="180" height="180" rx="36" fill="#0F4C6E"/>
+  <path d="M110.3 52.9a5.6 5.6 0 0 0 0 7.9l9 9a5.6 5.6 0 0 0 7.9 0l21.3-21.3a33.8 33.8 0 0 1-44.7 44.7l-38.8 38.8a11.8 11.8 0 0 1-16.7-16.7l38.8-38.8a33.8 33.8 0 0 1 44.7-44.7l-21.3 21.3z" fill="#F59E0B"/>
+  <text x="90" y="155" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="18" font-weight="700">lm3alem</text>
+</svg>

@@ -37,6 +37,20 @@ const config: Config = {
         card: "0 4px 24px -4px rgba(15, 76, 110, 0.12)",
         "card-hover": "0 20px 40px -12px rgba(245, 158, 11, 0.3)",
       },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
       backgroundImage: {
         "hero-gradient":
           "linear-gradient(135deg, #FAFAF7 0%, #F5F0E8 50%, #FAFAF7 100%)",

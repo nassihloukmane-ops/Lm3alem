@@ -1,0 +1,22 @@
+{
+  "name": "lm3alem",
+  "short_name": "lm3alem",
+  "description": "Trouvez un artisan qualifié au Maroc — plombiers, électriciens, menuisiers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#0F4C6E",
+  "lang": "fr-MA",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -15,9 +15,83 @@ const notoArabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: "lm3alem — Trouvez le bon artisan au Maroc",
+  metadataBase: new URL("https://lm3alem.ma"),
+  title: {
+    default:
+      "lm3alem – Trouvez un Artisan au Maroc | Plombier, Électricien, Menuisier",
+    template: "%s | lm3alem",
+  },
   description:
-    "Plombiers, électriciens, menuisiers — disponibles près de chez vous au Maroc. L'application qui connecte les clients aux meilleurs artisans.",
+    "lm3alem connecte les clients avec des artisans qualifiés au Maroc. Trouvez rapidement un plombier, électricien, menuisier ou peintre près de chez vous. Disponible sur iOS et Android.",
+  keywords: [
+    "artisan maroc",
+    "plombier maroc",
+    "électricien maroc",
+    "menuisier casablanca",
+    "trouver artisan",
+    "application artisan maroc",
+    "معلم",
+    "سباك",
+    "كهربائي",
+    "lm3alem",
+    "المعلم",
+    "artisan casablanca",
+    "dépannage maroc",
+    "services maison maroc",
+  ],
+  authors: [{ name: "lm3alem", url: "https://lm3alem.ma" }],
+  creator: "lm3alem",
+  publisher: "lm3alem",
+  alternates: {
+    canonical: "https://lm3alem.ma",
+    languages: {
+      "fr-MA": "https://lm3alem.ma",
+      "ar-MA": "https://lm3alem.ma/ar",
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_MA",
+    alternateLocale: "ar_MA",
+    url: "https://lm3alem.ma",
+    siteName: "lm3alem",
+    title: "lm3alem – Trouvez un Artisan qualifié au Maroc",
+    description:
+      "L'application qui connecte clients et artisans au Maroc. Plombiers, électriciens, menuisiers disponibles près de chez vous.",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "lm3alem – Application Artisan Maroc",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "lm3alem – Trouvez un Artisan au Maroc",
+    description:
+      "Connectez-vous avec des artisans qualifiés au Maroc en quelques secondes.",
+    images: ["/og-image.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/apple-touch-icon.svg",
+  },
+  manifest: "/site.webmanifest",
+  verification: {
+    google: "YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE",
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +100,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${inter.variable} ${notoArabic.variable}`}>
+    <html lang="fr-MA" dir="ltr" className={`${inter.variable} ${notoArabic.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="font-sans">{children}</body>
     </html>
   );
