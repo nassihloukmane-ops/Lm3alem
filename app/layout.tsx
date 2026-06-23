@@ -15,7 +15,7 @@ const notoArabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: "Lmaalem — Trouvez le bon artisan au Maroc",
+  title: "lm3alem — Trouvez le bon artisan au Maroc",
   description:
     "Plombiers, électriciens, menuisiers — disponibles près de chez vous au Maroc. L'application qui connecte les clients aux meilleurs artisans.",
 };

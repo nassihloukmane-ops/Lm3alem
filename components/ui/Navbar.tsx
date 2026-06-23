@@ -42,7 +42,7 @@ export function Navbar() {
           </div>
           <div className="flex flex-col">
             <span className="text-xl font-bold text-teal leading-tight">
-              Lmaalem
+              lm3alem
             </span>
             <span className="font-arabic text-[10px] text-teal/50 leading-none" dir="rtl">
               لمعلم

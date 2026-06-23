@@ -422,7 +422,7 @@ export default function Home() {
                 <Wrench className="h-5 w-5 text-white" />
               </div>
               <div>
-                <p className="font-bold text-white text-lg">Lmaalem</p>
+                <p className="font-bold text-white text-lg">lm3alem</p>
                 <p className="text-xs text-white/50">
                   L&apos;artisanat marocain, à portée de main
                 </p>
@@ -443,7 +443,7 @@ export default function Home() {
           </div>
 
           <div className="border-t border-white/10 pt-8 text-center text-sm text-white/50">
-            <p>© 2025 Lmaalem – Fait avec ❤️ au Maroc 🇲🇦</p>
+            <p>© 2025 lm3alem – Fait avec ❤️ au Maroc 🇲🇦</p>
           </div>
         </div>
       </footer>
