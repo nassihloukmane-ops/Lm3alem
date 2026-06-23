@@ -2,16 +2,15 @@
   "name": "lm3alem",
   "version": "0.1.0",
   "private": true,
-  "main": "server.js",
+  "main": "app.js",
   "engines": {
-    "node": "20.x",
-    "npm": ">=9.0.0"
+    "node": ">=20.x"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "build:static": "cross-env HOSTINGER_STATIC=true next build",
-    "start": "node server.js",
+    "start": "node app.js",
     "lint": "next lint"
   },
   "dependencies": {
