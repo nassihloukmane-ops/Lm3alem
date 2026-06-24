@@ -1,4 +1,4 @@
-import { siteUrl } from "@/lib/site-config";
+import { siteDescription, siteUrl } from "@/lib/site-config";
 
 export const faqItems = [
   {
@@ -33,8 +33,7 @@ export const websiteSchema = {
   "@type": "WebSite",
   name: "lm3alem",
   url: siteUrl,
-  description:
-    "Plateforme marocaine pour trouver des artisans qualifiés : plombiers, électriciens, menuisiers.",
+  description: siteDescription,
   inLanguage: ["fr-MA", "ar-MA"],
 };
 
@@ -42,8 +41,7 @@ export const mobileApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
   name: "lm3alem",
-  description:
-    "Application mobile qui connecte clients et artisans qualifiés au Maroc",
+  description: siteDescription,
   operatingSystem: "Android, iOS",
   applicationCategory: "UtilitiesApplication",
   offers: { "@type": "Offer", price: "0", priceCurrency: "MAD" },
@@ -56,9 +54,8 @@ export const organizationSchema = {
   "@type": "Organization",
   name: "lm3alem",
   url: siteUrl,
-  logo: `${siteUrl}/apple-touch-icon.svg`,
-  description:
-    "Plateforme marocaine de mise en relation entre clients et artisans",
+  logo: `${siteUrl}/apple-touch-icon.png`,
+  description: siteDescription,
   address: { "@type": "PostalAddress", addressCountry: "MA" },
   contactPoint: {
     "@type": "ContactPoint",

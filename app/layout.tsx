@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Noto_Sans_Arabic } from "next/font/google";
 import {
   googleSiteVerification,
+  siteDescription,
   siteName,
   siteUrl,
 } from "@/lib/site-config";
@@ -26,8 +27,7 @@ export const metadata: Metadata = {
       "lm3alem – Trouvez un Artisan au Maroc | Plombier, Électricien, Menuisier",
     template: "%s | lm3alem",
   },
-  description:
-    "lm3alem connecte les clients avec des artisans qualifiés au Maroc. Trouvez rapidement un plombier, électricien, menuisier ou peintre près de chez vous. Disponible sur iOS et Android.",
+  description: siteDescription,
   keywords: [
     "artisan maroc",
     "plombier maroc",
@@ -56,10 +56,15 @@ export const metadata: Metadata = {
     alternateLocale: "ar_MA",
     url: siteUrl,
     siteName,
-    title: "lm3alem – Trouvez un Artisan qualifié au Maroc",
-    description:
-      "L'application qui connecte clients et artisans au Maroc. Plombiers, électriciens, menuisiers disponibles près de chez vous.",
+    title: "lm3alem – L'app pour trouver un artisan au Maroc",
+    description: siteDescription,
     images: [
+      {
+        url: "/apple-touch-icon.png",
+        width: 180,
+        height: 180,
+        alt: "lm3alem – Application artisan Maroc",
+      },
       {
         url: "/og-image.svg",
         width: 1200,
@@ -71,9 +76,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "lm3alem – Trouvez un Artisan au Maroc",
-    description:
-      "Connectez-vous avec des artisans qualifiés au Maroc en quelques secondes.",
-    images: ["/og-image.svg"],
+    description: siteDescription,
+    images: ["/apple-touch-icon.png"],
   },
   robots: {
     index: true,
@@ -86,8 +90,14 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.svg",
-    apple: "/apple-touch-icon.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
   },
   manifest: "/site.webmanifest",
   ...(googleSiteVerification
