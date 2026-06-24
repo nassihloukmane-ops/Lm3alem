@@ -1,24 +1,31 @@
-const { spawn } = require("child_process");
+const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const handler = require("serve-handler");
 
-const port = process.env.PORT || "3000";
+const port = Number(process.env.PORT) || 3000;
 const outDir = path.join(__dirname, "out");
 const indexFile = path.join(outDir, "index.html");
 
 if (!fs.existsSync(indexFile)) {
-  console.error("ERROR: out/index.html not found. Run npm run build first.");
+  console.error("ERROR: out/index.html not found.");
+  console.error("Expected path:", indexFile);
   process.exit(1);
 }
 
-console.log(`lm3alem starting on 0.0.0.0:${port}`);
-
-const serveBin = path.join(__dirname, "node_modules", "serve", "build", "main.js");
-const listen = `tcp://0.0.0.0:${port}`;
-
-const proc = spawn(process.execPath, [serveBin, "out", "-s", "-l", listen], {
-  stdio: "inherit",
-  env: process.env,
+const server = http.createServer((request, response) => {
+  return handler(request, response, {
+    public: outDir,
+    trailingSlash: true,
+    rewrites: [{ source: "**", destination: "/index.html" }],
+  });
 });
 
-proc.on("exit", (code) => process.exit(code ?? 1));
+server.listen(port, "0.0.0.0", () => {
+  console.log(`lm3alem ready at http://0.0.0.0:${port}`);
+});
+
+server.on("error", (error) => {
+  console.error("Server failed to start:", error);
+  process.exit(1);
+});
