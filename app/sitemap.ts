@@ -1,38 +1,13 @@
 import { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   return [
     {
-      url: "https://lm3alem.ma",
-      lastModified,
-      changeFrequency: "monthly",
+      url: `${siteUrl}/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
       priority: 1,
-    },
-    {
-      url: "https://lm3alem.ma/#features",
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: "https://lm3alem.ma/#categories",
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: "https://lm3alem.ma/#how-it-works",
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: "https://lm3alem.ma/#faq",
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
     },
   ];
 }

@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_Arabic } from "next/font/google";
+import {
+  googleSiteVerification,
+  siteName,
+  siteUrl,
+} from "@/lib/site-config";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,7 +20,7 @@ const notoArabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lm3alem.ma"),
+  metadataBase: new URL(siteUrl),
   title: {
     default:
       "lm3alem – Trouvez un Artisan au Maroc | Plombier, Électricien, Menuisier",
@@ -39,18 +44,18 @@ export const metadata: Metadata = {
     "dépannage maroc",
     "services maison maroc",
   ],
-  authors: [{ name: "lm3alem", url: "https://lm3alem.ma" }],
-  creator: "lm3alem",
-  publisher: "lm3alem",
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
   alternates: {
-    canonical: "https://lm3alem.ma",
+    canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "fr_MA",
     alternateLocale: "ar_MA",
-    url: "https://lm3alem.ma",
-    siteName: "lm3alem",
+    url: siteUrl,
+    siteName,
     title: "lm3alem – Trouvez un Artisan qualifié au Maroc",
     description:
       "L'application qui connecte clients et artisans au Maroc. Plombiers, électriciens, menuisiers disponibles près de chez vous.",
@@ -85,6 +90,9 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.svg",
   },
   manifest: "/site.webmanifest",
+  ...(googleSiteVerification
+    ? { verification: { google: googleSiteVerification } }
+    : {}),
 };
 
 export default function RootLayout({

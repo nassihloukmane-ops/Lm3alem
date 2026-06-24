@@ -1,0 +1,8 @@
+# https://lm3alem.com/robots.txt
+User-agent: *
+Allow: /
+
+# Fichiers techniques Next.js (pas de contenu indexable)
+Disallow: /_next/
+
+Sitemap: https://lm3alem.com/sitemap.xml

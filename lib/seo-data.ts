@@ -1,4 +1,4 @@
-export const siteUrl = "https://lm3alem.ma";
+import { siteUrl } from "@/lib/site-config";
 
 export const faqItems = [
   {
@@ -28,6 +28,16 @@ export const faqItems = [
   },
 ] as const;
 
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "lm3alem",
+  url: siteUrl,
+  description:
+    "Plateforme marocaine pour trouver des artisans qualifiés : plombiers, électriciens, menuisiers.",
+  inLanguage: ["fr-MA", "ar-MA"],
+};
+
 export const mobileApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
@@ -37,11 +47,6 @@ export const mobileApplicationSchema = {
   operatingSystem: "Android, iOS",
   applicationCategory: "UtilitiesApplication",
   offers: { "@type": "Offer", price: "0", priceCurrency: "MAD" },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.8",
-    ratingCount: "320",
-  },
   url: siteUrl,
   inLanguage: ["fr", "ar"],
 };
@@ -51,14 +56,14 @@ export const organizationSchema = {
   "@type": "Organization",
   name: "lm3alem",
   url: siteUrl,
-  logo: `${siteUrl}/logo.png`,
+  logo: `${siteUrl}/apple-touch-icon.svg`,
   description:
     "Plateforme marocaine de mise en relation entre clients et artisans",
   address: { "@type": "PostalAddress", addressCountry: "MA" },
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
-    email: "contact@lm3alem.ma",
+    email: "contact@lm3alem.com",
   },
   sameAs: [
     "https://www.facebook.com/lm3alem",

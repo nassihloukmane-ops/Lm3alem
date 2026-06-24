@@ -1,12 +1,13 @@
 import { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site-config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/admin/"],
+      disallow: ["/_next/"],
     },
-    sitemap: "https://lm3alem.ma/sitemap.xml",
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }
