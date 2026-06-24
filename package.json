@@ -4,13 +4,13 @@
   "private": true,
   "main": "app.js",
   "engines": {
-    "node": ">=20.x"
+    "node": ">=20.x <=22.x"
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-favicons.mjs",
     "build": "next build",
-    "start": "node app.js",
+    "start": "next start",
+    "favicons": "node scripts/generate-favicons.mjs",
     "lint": "next lint"
   },
   "dependencies": {
