@@ -9,6 +9,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "pack:hostinger": "node scripts/pack-hostinger.mjs",
+    "build:hostinger": "next build && node scripts/pack-hostinger.mjs",
     "start": "node app.js",
     "favicons": "node scripts/generate-favicons.mjs",
     "lint": "next lint"

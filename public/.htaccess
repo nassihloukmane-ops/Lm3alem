@@ -11,8 +11,9 @@
   RewriteCond %{HTTP_HOST} ^www\.lm3alem\.com$ [NC]
   RewriteRule ^ https://lm3alem.com%{REQUEST_URI} [L,R=301]
 
-  # Ne jamais réécrire les assets Next / fichiers statiques
-  RewriteRule ^_next/ - [L]
+  # Assets Next (dossier "next/" — Hostinger bloque souvent "_next")
+  RewriteRule ^next/ - [L]
+  RewriteRule ^_next/(.*)$ /next/$1 [L]
   RewriteRule \.(js|css|png|jpg|jpeg|webp|svg|ico|gif|woff2|webmanifest|xml|txt|map)$ - [L]
 
   # SPA fallback uniquement si le fichier n'existe pas
@@ -23,6 +24,8 @@
 
 # Types MIME
 <IfModule mod_mime.c>
+  AddType text/css .css
+  AddType application/javascript .js
   AddType application/manifest+json .webmanifest
   AddType application/xml .xml
   AddType font/woff2 .woff2
