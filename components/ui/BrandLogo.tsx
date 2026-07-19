@@ -49,7 +49,7 @@ export function BrandLogo({
       </span>
 
       {withWordmark && (
-        <span className="flex flex-col min-w-0">
+        <span className="flex flex-col min-w-0 items-start gap-0.5">
           <span
             className={cn(
               "font-display font-bold leading-tight tracking-tight text-ink",
@@ -60,10 +60,9 @@ export function BrandLogo({
           </span>
           <span
             className={cn(
-              "font-arabic leading-none text-ink-secondary",
+              "font-arabic leading-snug text-ink-secondary/90 font-medium tracking-wide w-fit",
               arabicSize
             )}
-            dir="rtl"
             lang="ar"
           >
             المعلم

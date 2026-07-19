@@ -175,16 +175,17 @@ export function LandingPage() {
               <div className="mb-3 sm:mb-5 flex justify-center lg:justify-start">
                 <BrandLogo size={48} withWordmark={false} priority />
               </div>
-              <p className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-ink tracking-tight mb-1 sm:mb-2">
-                Lmaalem
-              </p>
-              <p
-                className="font-arabic text-sm sm:text-base text-ink-secondary mb-4 sm:mb-6"
-                dir="rtl"
-                lang="ar"
-              >
-                {t.hero.brandAr}
-              </p>
+              <div className="mb-4 sm:mb-6 flex flex-col items-center lg:items-start gap-1">
+                <p className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-ink tracking-tight">
+                  Lmaalem
+                </p>
+                <p
+                  className="font-arabic text-base sm:text-lg text-ink-secondary/90 font-medium tracking-wide w-fit"
+                  lang="ar"
+                >
+                  {t.hero.brandAr}
+                </p>
+              </div>
 
               <h1 className="font-display text-[1.65rem] leading-snug sm:text-4xl lg:text-[2.75rem] font-bold text-ink sm:leading-[1.15] tracking-tight mb-3 sm:mb-5 max-w-xl mx-auto lg:mx-0">
                 {t.hero.title}
