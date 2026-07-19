@@ -11,11 +11,13 @@
   RewriteCond %{HTTP_HOST} ^www\.lm3alem\.com$ [NC]
   RewriteRule ^ https://lm3alem.com%{REQUEST_URI} [L,R=301]
 
-  # Servir les fichiers existants directement
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
+  # Ne jamais réécrire les assets Next / fichiers statiques
+  RewriteRule ^_next/ - [L]
+  RewriteRule \.(js|css|png|jpg|jpeg|webp|svg|ico|gif|woff2|webmanifest|xml|txt|map)$ - [L]
 
+  # SPA fallback uniquement si le fichier n'existe pas
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ index.html [L]
 </IfModule>
 
