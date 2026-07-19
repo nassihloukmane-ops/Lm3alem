@@ -1,108 +1,259 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Wrench, Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, Moon, Sun, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { BrandLogo } from "@/components/ui/BrandLogo";
+import { useTheme } from "@/components/theme/ThemeProvider";
+import { useI18n } from "@/components/i18n/LocaleProvider";
+import { localeMeta, type Locale } from "@/lib/i18n/dictionaries";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { href: "#features", label: "Fonctionnalités" },
-  { href: "#how-it-works", label: "Comment ça marche" },
-  { href: "#categories", label: "Catégories" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#download", label: "Télécharger" },
-];
+const localeOptions: Locale[] = ["fr", "ar", "en"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+  const { theme, toggleTheme } = useTheme();
+  const { locale, setLocale, t } = useI18n();
+  const isDark = theme === "dark";
+
+  const navLinks = [
+    { href: "#demande", label: t.nav.demande },
+    { href: "#fonctionnalites", label: t.nav.features },
+    { href: "#comment-ca-marche", label: t.nav.how },
+    { href: "#metiers", label: t.nav.trades },
+    { href: "#artisans", label: t.nav.artisans },
+    { href: "#faq", label: t.nav.faq },
+  ];
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!langOpen) return;
+    const onPointer = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onPointer);
+    return () => document.removeEventListener("mousedown", onPointer);
+  }, [langOpen]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <motion.header
-      initial={{ y: -20, opacity: 0 }}
+      initial={{ y: -16, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.45 }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-warm-white/90 backdrop-blur-lg shadow-card border-b border-teal/5"
+        scrolled || mobileOpen
+          ? "bg-nav backdrop-blur-xl shadow-soft border-b border-outline"
           : "bg-transparent"
       )}
     >
       <nav
-        aria-label="Navigation principale"
-        className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+        aria-label={t.nav.aria}
+        className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between gap-3 safe-px sm:px-6 lg:px-8"
       >
-        <a href="/" aria-label="lm3alem – Accueil" className="flex items-center gap-2.5 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-saffron to-saffron-dark shadow-warm group-hover:scale-105 transition-transform">
-            <Wrench className="h-5 w-5 text-white" aria-hidden="true" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-bold text-teal leading-tight">lm3alem</span>
-            <span className="font-arabic text-[10px] text-teal/50 leading-none" dir="rtl" lang="ar">
-              لمعلم
-            </span>
-          </div>
+        <a
+          href="#accueil"
+          aria-label={`Lmaalem – ${t.nav.home}`}
+          className="shrink-0"
+          onClick={() => setMobileOpen(false)}
+        >
+          <BrandLogo size={32} compact priority />
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden xl:flex flex-1 items-center justify-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-teal/70 hover:text-saffron-dark transition-colors"
+              className="rounded-12 px-3 py-2 text-[13px] font-medium text-ink-secondary hover:text-ink hover:bg-surface-muted/80 transition-colors"
             >
               {link.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden md:block">
-          <a href="#download">
-            <Button>Télécharger l&apos;App</Button>
-          </a>
-        </div>
+        <div className="flex items-center gap-1.5 sm:gap-2.5">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={isDark ? t.nav.themeLight : t.nav.themeDark}
+            className="touch-target inline-flex h-10 w-10 sm:h-9 sm:w-9 items-center justify-center rounded-12 border border-outline bg-surface text-ink"
+          >
+            {isDark ? (
+              <Sun className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Moon className="h-4 w-4" aria-hidden="true" />
+            )}
+          </button>
 
-        <button
-          type="button"
-          className="md:hidden p-2 rounded-lg text-teal hover:bg-teal/5"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-expanded={mobileOpen}
-          aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
-        >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+          <div ref={langRef} className="relative hidden sm:block">
+            <button
+              type="button"
+              onClick={() => setLangOpen((o) => !o)}
+              aria-expanded={langOpen}
+              aria-haspopup="listbox"
+              aria-label={t.nav.lang}
+              className="inline-flex h-9 items-center gap-1 rounded-12 border border-outline bg-surface px-2.5 text-xs font-bold text-ink"
+            >
+              {localeMeta[locale].label}
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 text-ink-secondary transition-transform",
+                  langOpen && "rotate-180"
+                )}
+                aria-hidden="true"
+              />
+            </button>
+            <AnimatePresence>
+              {langOpen && (
+                <motion.ul
+                  role="listbox"
+                  aria-label={t.nav.lang}
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute end-0 top-[calc(100%+6px)] z-50 min-w-[4.5rem] overflow-hidden rounded-12 border border-outline bg-surface shadow-card py-1"
+                >
+                  {localeOptions.map((code) => (
+                    <li
+                      key={code}
+                      role="option"
+                      aria-selected={locale === code}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLocale(code);
+                          setLangOpen(false);
+                        }}
+                        className={cn(
+                          "w-full px-3 py-2.5 text-start text-xs font-bold transition-colors",
+                          locale === code
+                            ? "bg-primary/10 text-primary"
+                            : "text-ink-secondary hover:bg-surface-muted hover:text-ink"
+                        )}
+                      >
+                        {localeMeta[code].label}
+                      </button>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <a href="#telecharger" className="hidden md:block">
+            <Button size="sm" className="px-4 h-9 text-xs">
+              {t.nav.download}
+            </Button>
+          </a>
+
+          <button
+            type="button"
+            className="touch-target inline-flex h-10 w-10 items-center justify-center rounded-12 text-ink hover:bg-surface-muted xl:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
+          >
+            {mobileOpen ? (
+              <X className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            )}
+          </button>
+        </div>
       </nav>
 
+      {/* Menu mobile plein écran */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-teal/10 bg-warm-white/95 backdrop-blur-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="xl:hidden fixed inset-0 top-14 z-40 bg-page-start/98 backdrop-blur-xl"
           >
-            <div className="flex flex-col gap-1 px-4 py-4">
-              {navLinks.map((link) => (
+            <div className="flex h-[calc(100dvh-3.5rem)] flex-col safe-px safe-pb pt-2">
+              <div className="flex-1 overflow-y-auto pb-4">
                 <a
-                  key={link.href}
-                  href={link.href}
+                  href="#accueil"
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-teal/70 hover:bg-teal/5 hover:text-saffron-dark transition-colors"
+                  className="flex items-center rounded-16 px-4 py-3.5 text-base font-semibold text-ink hover:bg-surface-muted"
                 >
-                  {link.label}
+                  {t.nav.home}
                 </a>
-              ))}
-              <a href="#download" onClick={() => setMobileOpen(false)} className="mt-2 block">
-                <Button className="w-full">Télécharger l&apos;App</Button>
-              </a>
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center rounded-16 px-4 py-3.5 text-base font-medium text-ink-secondary hover:bg-surface-muted hover:text-primary"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+
+                <div className="mt-4 px-2">
+                  <p className="px-2 mb-2 text-[11px] font-bold uppercase tracking-wider text-ink-secondary">
+                    {t.nav.lang}
+                  </p>
+                  <div
+                    role="group"
+                    aria-label={t.nav.lang}
+                    className="flex gap-2"
+                  >
+                    {localeOptions.map((code) => (
+                      <button
+                        key={code}
+                        type="button"
+                        onClick={() => setLocale(code)}
+                        aria-pressed={locale === code}
+                        className={cn(
+                          "flex-1 rounded-16 py-3 text-sm font-bold border transition-colors",
+                          locale === code
+                            ? "bg-primary text-white border-primary"
+                            : "bg-surface text-ink-secondary border-outline"
+                        )}
+                      >
+                        {localeMeta[code].label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="shrink-0 border-t border-outline pt-3 pb-2 space-y-2">
+                <a href="#telecharger" onClick={() => setMobileOpen(false)}>
+                  <Button className="w-full h-12 text-base">
+                    {t.nav.downloadApp}
+                  </Button>
+                </a>
+                <a href="#artisans" onClick={() => setMobileOpen(false)}>
+                  <Button variant="outline" className="w-full h-11">
+                    {t.nav.artisans}
+                  </Button>
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

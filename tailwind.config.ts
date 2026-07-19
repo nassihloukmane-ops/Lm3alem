@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,33 +10,77 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        saffron: {
-          DEFAULT: "#F59E0B",
-          dark: "#D97706",
-          light: "#FCD34D",
+        ink: {
+          DEFAULT: "rgb(var(--text) / <alpha-value>)",
+          secondary: "rgb(var(--text-secondary) / <alpha-value>)",
         },
-        teal: {
-          DEFAULT: "#0F4C6E",
-          light: "#1A6B94",
-          dark: "#0A3549",
+        primary: {
+          DEFAULT: "rgb(var(--primary) / <alpha-value>)",
+          dark: "rgb(var(--primary-dark) / <alpha-value>)",
+          container: "rgb(var(--primary-container) / <alpha-value>)",
         },
-        warm: {
-          white: "#FAFAF7",
-          cream: "#F5F0E8",
+        "on-primary": {
+          container: "rgb(var(--on-primary-container) / <alpha-value>)",
         },
-        terracotta: {
-          DEFAULT: "#C05E3C",
-          light: "#D4785A",
+        emerald: {
+          brand: "#047857",
+        },
+        violet: {
+          brand: "#6B21A8",
+        },
+        page: {
+          start: "rgb(var(--bg-page-start) / <alpha-value>)",
+          mid: "rgb(var(--bg-page-mid) / <alpha-value>)",
+          end: "rgb(var(--bg-page-end) / <alpha-value>)",
+        },
+        surface: {
+          DEFAULT: "rgb(var(--surface) / <alpha-value>)",
+          muted: "rgb(var(--surface-muted) / <alpha-value>)",
+        },
+        band: "rgb(var(--band) / <alpha-value>)",
+        outline: {
+          DEFAULT: "rgb(var(--outline) / <alpha-value>)",
+          strong: "rgb(var(--divider) / <alpha-value>)",
+        },
+        track: "rgb(var(--track) / <alpha-value>)",
+        success: "rgb(var(--success) / <alpha-value>)",
+        rating: "rgb(var(--rating) / <alpha-value>)",
+        indigo: {
+          app: "#6366F1",
+          light: "#818CF8",
+          deep: "#4F46E5",
+        },
+        cat: {
+          meca: "#5C6BC0",
+          bois: "#A1887F",
+          clean: "#26A69A",
+          plomb: "#42A5F5",
+          elec: "#FFB300",
+          peint: "#BA68C8",
+          jard: "#66BB6A",
+          clim: "#29B6F6",
+          vitr: "#90A4AE",
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        display: ["var(--font-fraunces)", "Georgia", "serif"],
+        sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
         arabic: ["var(--font-noto-arabic)", "system-ui", "sans-serif"],
       },
+      borderRadius: {
+        "12": "12px",
+        "16": "16px",
+        "20": "20px",
+        "24": "24px",
+      },
       boxShadow: {
-        warm: "0 10px 40px -10px rgba(245, 158, 11, 0.25)",
-        card: "0 4px 24px -4px rgba(15, 76, 110, 0.12)",
-        "card-hover": "0 20px 40px -12px rgba(245, 158, 11, 0.3)",
+        soft: "var(--shadow-soft)",
+        "soft-lg": "0 16px 40px -12px rgba(0, 0, 0, 0.25)",
+        card: "var(--shadow-card)",
+        "card-hover": "0 12px 32px -8px rgba(190, 24, 93, 0.2)",
+      },
+      height: {
+        btn: "52px",
       },
       keyframes: {
         "accordion-down": {
@@ -52,10 +97,7 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       backgroundImage: {
-        "hero-gradient":
-          "linear-gradient(135deg, #FAFAF7 0%, #F5F0E8 50%, #FAFAF7 100%)",
-        "cta-gradient":
-          "linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #C05E3C 100%)",
+        "brand-gradient": "var(--brand-gradient)",
       },
     },
   },

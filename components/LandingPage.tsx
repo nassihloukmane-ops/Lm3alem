@@ -1,495 +1,641 @@
 "use client";
 
+import { useState } from "react";
 import {
   LayoutGrid,
+  FileText,
+  UserCheck,
   MapPin,
-  CheckCircle2,
   MessageCircle,
-  Radio,
-  Route,
   Star,
-  Wrench,
+  QrCode,
+  Languages,
+  ShieldCheck,
+  Clock,
+  BadgeCheck,
 } from "lucide-react";
 import { Navbar } from "@/components/ui/Navbar";
 import { HeroPhone } from "@/components/ui/HeroPhone";
+import { DemandeSection } from "@/components/ui/DemandeSection";
 import { StepCard } from "@/components/ui/StepCard";
 import { CategoryCard } from "@/components/ui/CategoryCard";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { BrandLogo } from "@/components/ui/BrandLogo";
+import { SiteFooter } from "@/components/ui/SiteFooter";
+import { MobileStickyCta } from "@/components/ui/MobileStickyCta";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FadeIn, FadeInView } from "@/components/ui/motion-lazy";
-import { faqItems } from "@/lib/seo-data";
+import { FadeIn, FadeInView, Reveal3D, Stagger, StaggerItem } from "@/components/ui/motion-lazy";
+import { TiltSurface } from "@/components/ui/TiltSurface";
+import { useI18n } from "@/components/i18n/LocaleProvider";
+import { AppleLogo, GooglePlayLogo } from "@/components/ui/StoreIcons";
+import { cn } from "@/lib/utils";
 
-const categories = [
-  { emoji: "🔧", name: "Plombier", alt: "Plombier qualifié Maroc" },
-  { emoji: "⚡", name: "Électricien", alt: "Électricien professionnel Maroc" },
-  { emoji: "🪵", name: "Menuisier", alt: "Menuisier artisan Maroc" },
-  { emoji: "🎨", name: "Peintre", alt: "Peintre en bâtiment Maroc" },
-  { emoji: "❄️", name: "Climatisation", alt: "Technicien climatisation Maroc" },
-  { emoji: "🏠", name: "Maçon", alt: "Maçon professionnel Maroc" },
-  { emoji: "🔒", name: "Serrurier", alt: "Serrurier dépannage Maroc" },
-  { emoji: "🚿", name: "Carrelage", alt: "Carreleur artisan Maroc" },
-];
+const CATEGORY_COLORS = [
+  "#5C6BC0",
+  "#A1887F",
+  "#26A69A",
+  "#42A5F5",
+  "#FFB300",
+  "#BA68C8",
+  "#66BB6A",
+  "#29B6F6",
+  "#90A4AE",
+] as const;
 
-const features = [
-  {
-    icon: MessageCircle,
-    title: "Chat & appels audio en temps réel",
-    description:
-      "Communiquez directement avec votre artisan via messagerie instantanée ou appel vocal intégré.",
-    illustration: (
-      <div className="flex flex-col gap-2 p-4" role="img" aria-label="Exemple de conversation chat avec un artisan">
-        {["Salam, besoin d'un plombier", "Disponible dans 30 min !", "Parfait, j'attends 👍"].map(
-          (msg, i) => (
-            <div
-              key={i}
-              className={`rounded-2xl px-3 py-2 text-xs max-w-[200px] ${
-                i % 2 === 0
-                  ? "bg-saffron/15 text-teal self-start"
-                  : "bg-teal/10 text-teal self-end"
-              }`}
-            >
-              {msg}
-            </div>
-          )
-        )}
-      </div>
-    ),
-  },
-  {
-    icon: Radio,
-    title: "Disponibilité en direct",
-    description:
-      "Voyez en temps réel quels artisans sont disponibles près de chez vous, comme un feu vert sur la route.",
-    illustration: (
-      <div className="flex flex-col gap-2 p-4" role="img" aria-label="Statut de disponibilité des artisans">
-        {[
-          { name: "Hassan B.", status: "Disponible", online: true },
-          { name: "Karim M.", status: "En mission", online: false },
-          { name: "Omar T.", status: "Disponible", online: true },
-        ].map((a) => (
-          <div key={a.name} className="flex items-center gap-3 bg-white rounded-xl px-3 py-2 shadow-sm">
-            <div className={`w-2.5 h-2.5 rounded-full ${a.online ? "bg-emerald-500 animate-pulse" : "bg-gray-300"}`} />
-            <span className="text-xs font-medium text-teal flex-1">{a.name}</span>
-            <span className={`text-[10px] font-semibold ${a.online ? "text-emerald-600" : "text-gray-400"}`}>
-              {a.status}
-            </span>
-          </div>
-        ))}
-      </div>
-    ),
-  },
-  {
-    icon: Route,
-    title: "Suivi de mission en direct",
-    description:
-      "Suivez chaque étape de votre intervention : En attente → En cours → Terminée → Évaluée.",
-    illustration: (
-      <div className="flex items-center justify-between px-4 py-6 gap-1" role="img" aria-label="Étapes de suivi de mission">
-        {["En attente", "En cours", "Terminée", "Évaluée"].map((step, i) => (
-          <div key={step} className="flex flex-col items-center gap-1.5 flex-1">
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                i <= 2 ? "bg-saffron text-white" : "bg-teal/10 text-teal/40"
-              }`}
-            >
-              {i + 1}
-            </div>
-            <span className={`text-[9px] text-center leading-tight ${i <= 2 ? "text-teal font-medium" : "text-teal/40"}`}>
-              {step}
-            </span>
-          </div>
-        ))}
-      </div>
-    ),
-  },
-  {
-    icon: Star,
-    title: "Avis & évaluations vérifiés",
-    description:
-      "Consultez les notes et avis authentiques laissés par d'autres clients pour choisir en confiance.",
-    illustration: (
-      <div className="p-4 space-y-2" role="img" aria-label="Avis clients vérifiés">
-        {[
-          { name: "Fatima Z.", rating: 5, text: "Travail impeccable, très professionnel !" },
-          { name: "Ahmed R.", rating: 5, text: "Rapide et soigné, je recommande." },
-        ].map((review) => (
-          <div key={review.name} className="bg-white rounded-xl p-3 shadow-sm">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-teal">{review.name}</span>
-              <span className="text-[10px] text-saffron" aria-label={`${review.rating} étoiles`}>
-                {"★".repeat(review.rating)}
-              </span>
-            </div>
-            <p className="text-[10px] text-teal/60">{review.text}</p>
-          </div>
-        ))}
-      </div>
-    ),
-  },
-];
+const FEATURE_ICONS = [
+  Clock,
+  MapPin,
+  MessageCircle,
+  Star,
+  QrCode,
+  Languages,
+] as const;
+
+const TRUST_ICONS = [ShieldCheck, Star, MapPin, QrCode] as const;
+
+const CLIENT_STEP_ICONS = [LayoutGrid, FileText, UserCheck] as const;
+const ARTISAN_STEP_ICONS = [BadgeCheck, MapPin, QrCode] as const;
+
+const ARTISAN_WHY_ICONS = [MapPin, MessageCircle, Star, QrCode] as const;
 
 function AppStoreBadge() {
+  const { t } = useI18n();
   return (
     <a
-      href="#"
-      aria-label="Télécharger lm3alem sur l'App Store"
-      className="inline-flex items-center gap-3 bg-black text-white rounded-xl px-5 py-3 hover:bg-gray-900 transition-colors shadow-lg hover:-translate-y-0.5 transition-transform"
+      href="#telecharger"
+      aria-label={t.download.appStoreAria}
+      className="inline-flex w-full sm:w-auto items-center gap-3 bg-surface text-ink border border-outline rounded-16 px-5 h-12 sm:h-btn hover:border-primary transition-all hover:scale-[1.02] shadow-soft"
     >
-      <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current" aria-hidden="true">
-        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-      </svg>
-      <div className="text-left">
-        <p className="text-[10px] leading-none opacity-80">Télécharger sur</p>
-        <p className="text-sm font-semibold leading-tight">App Store</p>
+      <AppleLogo className="w-7 h-7" />
+      <div className="text-start">
+        <p className="text-[10px] leading-none text-ink-secondary">
+          {t.download.appStoreTop}
+        </p>
+        <p className="text-sm font-semibold leading-tight text-ink">
+          {t.download.appStoreName}
+        </p>
       </div>
     </a>
   );
 }
 
 function GooglePlayBadge() {
+  const { t } = useI18n();
   return (
     <a
-      href="#"
-      aria-label="Télécharger lm3alem sur Google Play"
-      className="inline-flex items-center gap-3 bg-black text-white rounded-xl px-5 py-3 hover:bg-gray-900 transition-colors shadow-lg hover:-translate-y-0.5 transition-transform"
+      href="#telecharger"
+      aria-label={t.download.playAria}
+      className="inline-flex w-full sm:w-auto items-center gap-3 bg-surface text-ink border border-outline rounded-16 px-5 h-12 sm:h-btn hover:border-primary transition-all hover:scale-[1.02] shadow-soft"
     >
-      <svg viewBox="0 0 24 24" className="w-7 h-7" aria-hidden="true">
-        <path fill="#EA4335" d="M3.6 1.8L13.2 12 3.6 22.2A2.4 2.4 0 0 1 1.2 20.4V3.6A2.4 2.4 0 0 1 3.6 1.8z" />
-        <path fill="#FBBC04" d="M13.2 12L20.4 5.4A2.4 2.4 0 0 1 22.8 7.2v9.6a2.4 2.4 0 0 1-2.4 2.4L13.2 12z" />
-        <path fill="#34A853" d="M3.6 22.2L13.2 12 3.6 1.8 1.2 3.6v16.8l2.4 1.8z" />
-        <path fill="#4285F4" d="M13.2 12L20.4 18.6 22.8 16.8V7.2L20.4 5.4 13.2 12z" />
-      </svg>
-      <div className="text-left">
-        <p className="text-[10px] leading-none opacity-80">Disponible sur</p>
-        <p className="text-sm font-semibold leading-tight">Google Play</p>
+      <span className="flex h-8 w-8 items-center justify-center">
+        <GooglePlayLogo className="h-7 w-7 drop-shadow-sm" />
+      </span>
+      <div className="text-start">
+        <p className="text-[10px] leading-none text-ink-secondary">
+          {t.download.playTop}
+        </p>
+        <p className="text-sm font-semibold leading-tight text-ink">
+          {t.download.playName}
+        </p>
       </div>
     </a>
   );
 }
 
 export function LandingPage() {
+  const { t } = useI18n();
+  const [howTab, setHowTab] = useState<"client" | "artisan">("client");
+
+  const categories = t.trades.names.map((name, i) => ({
+    name,
+    color: CATEGORY_COLORS[i] ?? CATEGORY_COLORS[0],
+    alt: `${name} — Lmaalem`,
+  }));
+
+  const features = FEATURE_ICONS.map((icon, i) => ({
+    icon,
+    title: t.features.items[i]?.title ?? "",
+    description: t.features.items[i]?.description ?? "",
+  }));
+
+  const trustPoints = TRUST_ICONS.map((icon, i) => ({
+    icon,
+    label: t.trust.items[i] ?? "",
+  }));
+
+  const clientSteps = CLIENT_STEP_ICONS.map((icon, i) => ({
+    step: i + 1,
+    icon,
+    title: t.how.clientSteps[i]?.title ?? "",
+    description: t.how.clientSteps[i]?.description ?? "",
+  }));
+
+  const artisanSteps = ARTISAN_STEP_ICONS.map((icon, i) => ({
+    step: i + 1,
+    icon,
+    title: t.how.artisanSteps[i]?.title ?? "",
+    description: t.how.artisanSteps[i]?.description ?? "",
+  }));
+
+  const steps = howTab === "client" ? clientSteps : artisanSteps;
+
   return (
     <>
       <Navbar />
 
+      {/* HERO — mobile-first */}
       <section
-        id="hero"
-        aria-label="Accueil lm3alem"
-        className="relative min-h-screen flex items-center zellige-pattern bg-section-hero pt-24 pb-16 lg:pb-0"
+        id="accueil"
+        aria-label={t.nav.home}
+        className="relative min-h-[100svh] flex items-start sm:items-center pt-16 sm:pt-24 pb-10 sm:pb-16 lg:pb-24 overflow-hidden mesh-depth"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-warm-white/50 to-warm-white pointer-events-none" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div
+          className="pointer-events-none absolute -top-24 -left-20 h-[16rem] sm:h-[28rem] w-[16rem] sm:w-[28rem] rounded-full bg-primary/15 blur-3xl halo-orb"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute bottom-0 right-0 h-[12rem] sm:h-[22rem] w-[12rem] sm:w-[22rem] rounded-full bg-emerald-brand/12 blur-3xl halo-orb hidden sm:block"
+          aria-hidden="true"
+          style={{ animationDelay: "3s" }}
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full scene-3d">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 sm:gap-12 lg:gap-8 items-center">
             <FadeIn
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="text-center lg:text-left"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center lg:text-start order-1"
             >
-              <Badge className="mb-6">🇲🇦 Made in Morocco</Badge>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-teal leading-[1.1] tracking-tight mb-4">
-                Trouvez un Artisan au Maroc,{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron to-terracotta">
-                  en quelques secondes
-                </span>
+              <div className="mb-3 sm:mb-5 flex justify-center lg:justify-start">
+                <BrandLogo size={48} withWordmark={false} priority />
+              </div>
+              <p className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-ink tracking-tight mb-1 sm:mb-2">
+                Lmaalem
+              </p>
+              <p
+                className="font-arabic text-sm sm:text-base text-ink-secondary mb-4 sm:mb-6"
+                dir="rtl"
+                lang="ar"
+              >
+                {t.hero.brandAr}
+              </p>
+
+              <h1 className="font-display text-[1.65rem] leading-snug sm:text-4xl lg:text-[2.75rem] font-bold text-ink sm:leading-[1.15] tracking-tight mb-3 sm:mb-5 max-w-xl mx-auto lg:mx-0">
+                {t.hero.title}
               </h1>
-              <p className="font-arabic text-lg text-teal/50 mb-3" dir="rtl" lang="ar">
-                جد المعلم المناسب في ثوانٍ
+
+              <p className="text-base sm:text-lg text-ink-secondary mb-5 sm:mb-8 max-w-md sm:max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                {t.hero.subtitle}
               </p>
-              <p className="text-lg text-teal/60 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                Plombiers, électriciens, menuisiers — disponibles près de chez vous au Maroc
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <AppStoreBadge />
-                <GooglePlayBadge />
+
+              <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3 justify-center lg:justify-start">
+                <a href="#telecharger" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full h-12 text-base">
+                    {t.hero.ctaDownload}
+                  </Button>
+                </a>
+                <a href="#comment-ca-marche" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full h-12 text-base">
+                    {t.hero.ctaHow}
+                  </Button>
+                </a>
               </div>
             </FadeIn>
 
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex justify-center lg:justify-end relative order-2 mt-1 sm:mt-0">
+              <div
+                aria-hidden="true"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] aspect-square rounded-[2rem] border border-outline/60 -rotate-6 opacity-40 hidden md:block"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72%] aspect-square rounded-[2rem] border border-primary/20 rotate-3 opacity-50 hidden md:block"
+              />
               <HeroPhone />
             </div>
           </div>
         </div>
       </section>
 
-      <section id="how-it-works" aria-labelledby="how-it-works-title" className="py-24 bg-section-white relative">
-        <div className="absolute inset-0 zellige-pattern-subtle opacity-50" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeInView className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4">Simple &amp; rapide</Badge>
-            <h2 id="how-it-works-title" className="text-3xl sm:text-4xl font-extrabold text-teal mb-4">
-              Comment ça marche ?
+      {/* CONFIANCE */}
+      <section
+        id="confiance"
+        aria-labelledby="confiance-title"
+        className="relative z-10 -mt-2 sm:-mt-10 pb-6 sm:pb-8"
+      >
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <Reveal3D>
+            <div className="glass-plane rounded-20 sm:rounded-24 px-4 py-6 sm:px-10 sm:py-9">
+              <h2
+                id="confiance-title"
+                className="font-display text-lg sm:text-2xl font-bold text-ink text-center mb-5 sm:mb-8"
+              >
+                {t.trust.title}
+              </h2>
+              <div className="sm:hidden -mx-1 px-1">
+                <div className="scroll-x-snap">
+                  {trustPoints.map((point) => {
+                    const Icon = point.icon;
+                    return (
+                      <div
+                        key={point.label}
+                        className="w-[42%] max-w-[10.5rem] flex flex-col items-center text-center gap-2 rounded-16 bg-surface/80 border border-outline p-3"
+                      >
+                        <div className="flex h-10 w-10 items-center justify-center rounded-16 bg-primary-container">
+                          <Icon className="h-4 w-4 text-primary" aria-hidden />
+                        </div>
+                        <p className="text-xs font-semibold text-ink leading-snug">
+                          {point.label}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <Stagger className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+                {trustPoints.map((point) => {
+                  const Icon = point.icon;
+                  return (
+                    <StaggerItem
+                      key={point.label}
+                      className="flex flex-col items-center text-center gap-3"
+                    >
+                      <div className="flex h-12 w-12 items-center justify-center rounded-16 bg-primary-container shadow-soft">
+                        <Icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                      </div>
+                      <p className="text-sm font-semibold text-ink">{point.label}</p>
+                    </StaggerItem>
+                  );
+                })}
+              </Stagger>
+            </div>
+          </Reveal3D>
+        </div>
+      </section>
+
+      {/* POUR QUI */}
+      <section
+        id="pour-qui"
+        aria-labelledby="pour-qui-title"
+        className="section-pad"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 scene-3d">
+          <FadeInView className="text-center mb-14">
+            <h2
+              id="pour-qui-title"
+              className="font-display text-3xl sm:text-4xl font-bold text-ink mb-3"
+            >
+              {t.forWho.title}
             </h2>
-            <p className="text-teal/60 max-w-xl mx-auto">
-              Trois étapes pour trouver et réserver le meilleur artisan près de chez vous
+            <p className="text-ink-secondary max-w-xl mx-auto">
+              {t.forWho.subtitle}
             </p>
           </FadeInView>
 
-          <div className="relative grid md:grid-cols-3 gap-12 md:gap-8">
-            <svg
-              className="hidden md:block absolute top-8 left-[20%] right-[20%] h-1 z-0"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <line
-                x1="0"
-                y1="50%"
-                x2="100%"
-                y2="50%"
-                stroke="#F59E0B"
-                strokeWidth="2"
-                strokeOpacity="0.3"
-                className="step-connector"
-              />
-            </svg>
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            <TiltSurface maxTilt={5} hoverScale={1.015}>
+              <Reveal3D className="rounded-24 border border-outline bg-surface p-5 sm:p-8 lg:p-10 shadow-card h-full">
+                <h3 className="font-display text-2xl font-bold text-ink mb-3">
+                  {t.forWho.clientTitle}
+                </h3>
+                <p className="text-ink-secondary mb-8 leading-relaxed">
+                  {t.forWho.clientText}
+                </p>
+                <a href="#telecharger">
+                  <Button>{t.forWho.clientCta}</Button>
+                </a>
+              </Reveal3D>
+            </TiltSurface>
 
-            <StepCard
-              step={1}
-              icon={LayoutGrid}
-              title="Choisissez un métier"
-              description="Parcourez nos catégories et sélectionnez le service dont vous avez besoin."
-              index={0}
-            />
-            <StepCard
-              step={2}
-              icon={MapPin}
-              title="Trouvez un Maalem disponible"
-              description="Consultez les profils, les notes et la localisation des artisans proches."
-              index={1}
-            />
-            <StepCard
-              step={3}
-              icon={CheckCircle2}
-              title="Lancez votre mission"
-              description="Réservez, discutez et suivez votre intervention en temps réel."
-              index={2}
-            />
+            <TiltSurface maxTilt={5} hoverScale={1.015}>
+              <Reveal3D
+                delay={0.1}
+                className="rounded-24 border border-outline bg-surface p-5 sm:p-8 lg:p-10 shadow-card h-full"
+              >
+                <h3 className="font-display text-2xl font-bold text-ink mb-3">
+                  {t.forWho.artisanTitle}
+                </h3>
+                <p className="text-ink-secondary mb-8 leading-relaxed">
+                  {t.forWho.artisanText}
+                </p>
+                <a href="#artisans">
+                  <Button variant="outline">{t.forWho.artisanCta}</Button>
+                </a>
+              </Reveal3D>
+            </TiltSurface>
           </div>
         </div>
       </section>
 
-      <section id="categories" aria-labelledby="categories-title" className="py-24 bg-section-cream">
+      <DemandeSection />
+
+      {/* FONCTIONNALITÉS */}
+      <section
+        id="fonctionnalites"
+        aria-labelledby="fonctionnalites-title"
+        className="section-pad bg-surface-muted"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInView className="text-center mb-14">
-            <Badge className="mb-4">Nos services</Badge>
-            <h2 id="categories-title" className="text-3xl sm:text-4xl font-extrabold text-teal mb-4">
-              Tous les métiers, un seul app
+            <h2
+              id="fonctionnalites-title"
+              className="font-display text-3xl sm:text-4xl font-bold text-ink mb-3"
+            >
+              {t.features.title}
             </h2>
-            <p className="text-teal/60 max-w-xl mx-auto">
-              Des artisans qualifiés pour chaque besoin de votre maison ou bureau
+            <p className="text-ink-secondary max-w-xl mx-auto">
+              {t.features.subtitle}
             </p>
           </FadeInView>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {categories.map((cat, i) => (
-              <CategoryCard
-                key={cat.name}
-                emoji={cat.emoji}
-                name={cat.name}
-                alt={cat.alt}
+          <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 scene-3d">
+            {features.map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <StaggerItem key={feature.title}>
+                  <TiltSurface maxTilt={6} hoverScale={1.02}>
+                    <div className="rounded-20 border border-outline bg-surface p-6 shadow-card h-full">
+                      <div className="inline-flex h-12 w-12 items-center justify-center rounded-16 bg-primary-container mb-4 shadow-soft">
+                        <Icon
+                          className="h-5 w-5 text-primary"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <h3 className="text-lg font-bold text-ink mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-ink-secondary leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </TiltSurface>
+                </StaggerItem>
+              );
+            })}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* COMMENT ÇA MARCHE */}
+      <section
+        id="comment-ca-marche"
+        aria-labelledby="comment-ca-marche-title"
+        className="section-pad scene-3d"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeInView className="text-center mb-10">
+            <h2
+              id="comment-ca-marche-title"
+              className="font-display text-3xl sm:text-4xl font-bold text-ink mb-3"
+            >
+              {t.how.title}
+            </h2>
+            <p className="text-ink-secondary max-w-xl mx-auto mb-8">
+              {t.how.subtitle}
+            </p>
+
+            <div
+              role="tablist"
+              aria-label={t.nav.how}
+              className="inline-flex rounded-16 border border-outline bg-surface p-1 shadow-soft"
+            >
+              {(
+                [
+                  { id: "client" as const, label: t.how.tabClient },
+                  { id: "artisan" as const, label: t.how.tabArtisan },
+                ]
+              ).map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={howTab === tab.id}
+                  onClick={() => setHowTab(tab.id)}
+                  className={cn(
+                    "rounded-12 px-5 py-2.5 text-sm font-bold transition-colors",
+                    howTab === tab.id
+                      ? "bg-primary text-white"
+                      : "text-ink-secondary hover:text-ink"
+                  )}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </FadeInView>
+
+          <div className="relative grid md:grid-cols-3 gap-12 md:gap-8 mb-12">
+            {steps.map((s, i) => (
+              <StepCard
+                key={`${howTab}-${s.title}`}
+                step={s.step}
+                icon={s.icon}
+                title={s.title}
+                description={s.description}
                 index={i}
               />
             ))}
           </div>
+
+          <div className="text-center">
+            <a href="#telecharger">
+              <Button>{t.how.cta}</Button>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section id="features" aria-labelledby="features-title" className="py-24 bg-section-white">
+      {/* MÉTIERS */}
+      <section
+        id="metiers"
+        aria-labelledby="metiers-title"
+        className="section-pad bg-surface-muted"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeInView className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4">Fonctionnalités</Badge>
-            <h2 id="features-title" className="text-3xl sm:text-4xl font-extrabold text-teal mb-4">
-              Tout ce dont vous avez besoin
+          <FadeInView className="text-center mb-14">
+            <h2
+              id="metiers-title"
+              className="font-display text-3xl sm:text-4xl font-bold text-ink mb-3"
+            >
+              {t.trades.title}
             </h2>
-            <p className="text-teal/60 max-w-xl mx-auto">
-              Une expérience complète, de la recherche à l&apos;évaluation
+            <p className="text-ink-secondary max-w-xl mx-auto">
+              {t.trades.subtitle}
             </p>
           </FadeInView>
 
-          <div className="space-y-20">
-            {features.map((feature, i) => {
-              const Icon = feature.icon;
-              const isReversed = i % 2 === 1;
-
-              return (
-                <FadeInView
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.6 }}
-                  className={`flex flex-col ${
-                    isReversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                  } items-center gap-10 lg:gap-16`}
-                >
-                  <div className="flex-1 text-center lg:text-left">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-saffron/15 mb-5">
-                      <Icon className="h-6 w-6 text-saffron-dark" aria-hidden="true" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-teal mb-3">{feature.title}</h3>
-                    <p className="text-teal/60 leading-relaxed max-w-md mx-auto lg:mx-0">
-                      {feature.description}
-                    </p>
-                  </div>
-                  <div className="flex-1 w-full max-w-md">
-                    <div className="rounded-2xl bg-gradient-to-br from-warm-cream to-warm-white border border-teal/8 shadow-card overflow-hidden">
-                      {feature.illustration}
-                    </div>
-                  </div>
-                </FadeInView>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="stats" aria-label="Statistiques lm3alem" className="py-16 bg-section-teal text-white relative overflow-hidden">
-        <div className="absolute inset-0 zellige-pattern-subtle opacity-30" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            {[
-              { value: 500, suffix: "+", label: "Artisans inscrits" },
-              { value: 3000, suffix: "+", label: "Missions complétées" },
-              { value: 4.8, suffix: "★", label: "Note moyenne", decimals: 1 },
-              { value: 10, suffix: "", label: "Villes au Maroc" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="text-3xl sm:text-4xl font-extrabold text-saffron-light mb-1">
-                  <AnimatedCounter
-                    end={stat.value}
-                    suffix={stat.suffix}
-                    decimals={stat.decimals}
-                  />
-                </p>
-                <p className="text-sm text-white/70">{stat.label}</p>
-              </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {categories.map((cat, i) => (
+              <CategoryCard
+                key={cat.name}
+                name={cat.name}
+                alt={cat.alt}
+                color={cat.color}
+                index={i}
+              />
             ))}
           </div>
+
+          <p className="mt-10 text-center text-sm text-ink-secondary max-w-2xl mx-auto">
+            {t.trades.footer}
+          </p>
         </div>
       </section>
 
-      <section id="faq" aria-labelledby="faq-title" className="py-24 bg-section-cream">
+      {/* ARTISANS */}
+      <section
+        id="artisans"
+        aria-labelledby="artisans-title"
+        className="section-pad bg-surface-muted border-y border-outline relative overflow-hidden mesh-depth"
+      >
+        <div
+          className="pointer-events-none absolute top-0 right-0 h-64 w-64 rounded-full bg-primary/10 blur-3xl"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 scene-3d">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+            <TiltSurface maxTilt={5} hoverScale={1.015}>
+              <Reveal3D className="rounded-24 border border-outline bg-surface p-5 sm:p-8 lg:p-10 shadow-card flex flex-col h-full">
+                <h2
+                  id="artisans-title"
+                  className="font-display text-3xl sm:text-4xl font-bold text-ink mb-4"
+                >
+                  {t.artisans.title}
+                </h2>
+                <p className="text-ink-secondary text-lg mb-8 leading-relaxed flex-1">
+                  {t.artisans.text}
+                </p>
+                <a href="#telecharger" className="self-start">
+                  <Button variant="gradient">{t.artisans.cta}</Button>
+                </a>
+              </Reveal3D>
+            </TiltSurface>
+
+            <TiltSurface maxTilt={5} hoverScale={1.015}>
+              <Reveal3D
+                delay={0.1}
+                className="rounded-24 border border-outline bg-surface p-5 sm:p-8 lg:p-10 shadow-card flex flex-col h-full"
+              >
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-ink mb-4">
+                  {t.artisans.whyTitle}
+                </h3>
+                <ul className="space-y-4 mb-8 flex-1 list-none">
+                  {ARTISAN_WHY_ICONS.map((Icon, i) => {
+                    const item = t.artisans.whyItems[i];
+                    if (!item) return null;
+                    return (
+                      <li key={item.title} className="flex gap-3">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-12 bg-primary-container">
+                          <Icon
+                            className="h-5 w-5 text-primary"
+                            aria-hidden="true"
+                          />
+                        </span>
+                        <span>
+                          <p className="text-sm font-bold text-ink">
+                            {item.title}
+                          </p>
+                          <p className="text-sm text-ink-secondary leading-relaxed">
+                            {item.text}
+                          </p>
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <a href="#comment-ca-marche" className="self-start">
+                  <Button variant="outline">{t.artisans.whyCta}</Button>
+                </a>
+              </Reveal3D>
+            </TiltSurface>
+          </div>
+        </div>
+      </section>
+
+      {/* TÉLÉCHARGER */}
+      <section
+        id="telecharger"
+        aria-labelledby="telecharger-title"
+        className="section-pad bg-surface-muted"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeInView className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 rounded-20 sm:rounded-24 border border-outline bg-surface p-5 sm:p-8 lg:p-12 shadow-card">
+            <div className="text-center lg:text-start w-full">
+              <h2
+                id="telecharger-title"
+                className="font-display text-2xl sm:text-4xl lg:text-5xl font-bold text-ink mb-3 sm:mb-4 leading-tight"
+              >
+                {t.download.title}
+              </h2>
+              <p className="text-ink-secondary text-base sm:text-lg mb-6 sm:mb-8 max-w-md mx-auto lg:mx-0">
+                {t.download.subtitle}
+              </p>
+              <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center lg:justify-start">
+                <AppStoreBadge />
+                <GooglePlayBadge />
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-3 shrink-0">
+              <div className="w-36 h-36 sm:w-40 sm:h-40 rounded-20 sm:rounded-24 bg-surface-muted border border-outline p-3 sm:p-4 shadow-soft">
+                <div
+                  className="w-full h-full rounded-16 border border-dashed border-outline-strong flex flex-col items-center justify-center gap-2 bg-surface"
+                  role="img"
+                  aria-label={t.download.scan}
+                >
+                  <QrCode
+                    className="h-14 w-14 sm:h-16 sm:w-16 text-ink/40"
+                    aria-hidden="true"
+                  />
+                  <span className="text-[10px] text-ink-secondary font-medium text-center px-2">
+                    {t.download.scan}
+                  </span>
+                </div>
+              </div>
+              <span className="text-ink-secondary text-xs">
+                {t.download.available}
+              </span>
+            </div>
+          </FadeInView>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section
+        id="faq"
+        aria-labelledby="faq-title"
+        className="section-pad bg-surface-muted"
+      >
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <FadeInView className="text-center mb-12">
-            <Badge className="mb-4">FAQ</Badge>
-            <h2 id="faq-title" className="text-3xl sm:text-4xl font-extrabold text-teal mb-4">
-              Questions fréquentes
+            <h2
+              id="faq-title"
+              className="font-display text-3xl sm:text-4xl font-bold text-ink mb-3"
+            >
+              {t.faq.title}
             </h2>
-            <p className="text-teal/60">
-              Tout ce que vous devez savoir sur lm3alem au Maroc
-            </p>
+            <p className="text-ink-secondary">{t.faq.subtitle}</p>
           </FadeInView>
 
           <Accordion type="single" collapsible className="w-full">
-            {faqItems.map((item, i) => (
+            {t.faq.items.map((item, i) => (
               <AccordionItem key={i} value={`faq-${i}`}>
-                <AccordionTrigger>
-                  <span lang={item.question.match(/[\u0600-\u06FF]/) ? "ar" : "fr"}>
-                    {item.question}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <span lang={item.answer.match(/[\u0600-\u06FF]/) ? "ar" : "fr"} dir={item.answer.match(/[\u0600-\u06FF]/) ? "rtl" : "ltr"}>
-                    {item.answer}
-                  </span>
-                </AccordionContent>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
       </section>
 
-      <section id="download" aria-labelledby="download-title" className="relative py-24 diagonal-split">
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeInView className="flex flex-col lg:flex-row items-center justify-between gap-12">
-            <div className="text-center lg:text-left">
-              <h2 id="download-title" className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 leading-tight">
-                Prêt à trouver votre Maalem ?
-              </h2>
-              <p className="text-white/80 text-lg mb-8 max-w-md">
-                Téléchargez l&apos;application gratuite et trouvez un artisan de confiance en quelques clics.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <AppStoreBadge />
-                <GooglePlayBadge />
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-36 h-36 rounded-2xl bg-white p-3 shadow-2xl">
-                <div
-                  className="w-full h-full rounded-xl border-2 border-dashed border-teal/20 flex flex-col items-center justify-center gap-2 bg-warm-white"
-                  role="img"
-                  aria-label="QR code pour télécharger lm3alem"
-                >
-                  <svg
-                    viewBox="0 0 100 100"
-                    width={80}
-                    height={80}
-                    aria-hidden="true"
-                    className="text-teal/30"
-                    fill="currentColor"
-                  >
-                    <title>QR code lm3alem</title>
-                    <rect x="10" y="10" width="20" height="20" />
-                    <rect x="70" y="10" width="20" height="20" />
-                    <rect x="10" y="70" width="20" height="20" />
-                    <rect x="40" y="40" width="10" height="10" />
-                    <rect x="55" y="40" width="10" height="10" />
-                    <rect x="70" y="55" width="10" height="10" />
-                    <rect x="40" y="70" width="10" height="10" />
-                    <rect x="55" y="70" width="10" height="10" />
-                    <rect x="70" y="70" width="20" height="20" />
-                  </svg>
-                  <span className="text-[10px] text-teal/40 font-medium">Scanner le QR code</span>
-                </div>
-              </div>
-              <span className="text-white/60 text-xs">Disponible iOS &amp; Android</span>
-            </div>
-          </FadeInView>
-        </div>
-      </section>
-
-      <footer className="bg-section-teal-dark text-white/80 py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-saffron" aria-hidden="true">
-                <Wrench className="h-5 w-5 text-white" />
-              </div>
-              <div>
-                <p className="font-bold text-white text-lg">lm3alem</p>
-                <p className="text-xs text-white/50">
-                  L&apos;artisanat marocain, à portée de main
-                </p>
-              </div>
-            </div>
-
-            <nav aria-label="Liens du pied de page">
-              <ul className="flex flex-wrap justify-center gap-6 text-sm list-none">
-                {["À propos", "Contact", "Politique de confidentialité"].map((link) => (
-                  <li key={link}>
-                    <a href="#" className="hover:text-saffron-light transition-colors">
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          <div className="border-t border-white/10 pt-8 text-center text-sm text-white/50">
-            <p>© 2025 lm3alem – Fait avec ❤️ au Maroc 🇲🇦</p>
-          </div>
-        </div>
-      </footer>
+      <MobileStickyCta />
+      <SiteFooter />
     </>
   );
 }

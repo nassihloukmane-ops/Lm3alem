@@ -14,7 +14,6 @@ export function JsonLd() {
   ];
 
   return (
-    //dsdhjhjh
     <>
       {schemas.map((schema) => (
         <script

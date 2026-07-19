@@ -2,59 +2,65 @@ import { siteDescription, siteUrl } from "@/lib/site-config";
 
 export const faqItems = [
   {
-    question: "Comment trouver un plombier au Maroc ?",
+    question: "Lmaalem est-il gratuit ?",
     answer:
-      "Avec lm3alem, téléchargez l'application, choisissez la catégorie Plombier, et trouvez un artisan disponible près de chez vous en quelques secondes.",
+      "Oui. Le téléchargement et l'inscription sont gratuits. Vous ne payez que le service de l'artisan que vous choisissez.",
   },
   {
-    question: "lm3alem est-il disponible dans toutes les villes du Maroc ?",
+    question: "Comment sont vérifiés les professionnels ?",
     answer:
-      "lm3alem est disponible à Casablanca, Rabat, Marrakech, Fès, Tanger et s'étend progressivement à d'autres villes.",
+      "Chaque professionnel passe une vérification d'identité et de profil. Les avis clients authentiques vous aident à choisir en confiance.",
   },
   {
-    question: "كيف أجد معلم سباكة في المغرب؟",
+    question: "Quelles zones sont couvertes ?",
     answer:
-      "مع تطبيق لمعلم، حمّل التطبيق، اختر فئة السباكة، وابحث عن معلم متاح بالقرب منك في ثوانٍ.",
+      "Lmaalem se déploie progressivement au Maroc. Les disponibilités près de chez vous s'affichent directement dans l'application.",
   },
   {
-    question: "L'application lm3alem est-elle gratuite ?",
+    question: "Comment devenir artisan sur Lmaalem ?",
     answer:
-      "Oui, le téléchargement et l'inscription sur lm3alem sont entièrement gratuits. Vous ne payez que le service de l'artisan que vous choisissez.",
+      "Téléchargez l'app, inscrivez-vous en tant que professionnel, complétez votre profil et la vérification, puis recevez des missions près de chez vous.",
   },
   {
-    question: "Comment sont vérifiés les artisans sur lm3alem ?",
+    question: "Puis-je discuter avec l'artisan avant la mission ?",
     answer:
-      "Chaque artisan passe par un processus de vérification d'identité et de compétences. Les avis clients authentiques vous permettent de choisir en toute confiance.",
+      "Oui. Le chat in-app et les appels vous permettent de coordonner la mission sans quitter Lmaalem.",
+  },
+  {
+    question: "L'application est-elle disponible en arabe ?",
+    answer:
+      "Oui. Lmaalem est disponible en français, en arabe (interface RTL) et en anglais.",
   },
 ] as const;
 
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "lm3alem",
+  name: "Lmaalem",
+  alternateName: ["lm3alem", "المعلم"],
   url: siteUrl,
   description: siteDescription,
-  inLanguage: ["fr-MA", "ar-MA"],
+  inLanguage: ["fr-MA", "ar-MA", "en"],
 };
 
 export const mobileApplicationSchema = {
   "@context": "https://schema.org",
-  "@type": "MobileApplication",
-  name: "lm3alem",
-  description: siteDescription,
+  "@type": "SoftwareApplication",
+  name: "Lmaalem",
+  applicationCategory: "LifestyleApplication",
   operatingSystem: "Android, iOS",
-  applicationCategory: "UtilitiesApplication",
+  description: siteDescription,
   offers: { "@type": "Offer", price: "0", priceCurrency: "MAD" },
   url: siteUrl,
-  inLanguage: ["fr", "ar"],
+  inLanguage: ["fr", "ar", "en"],
 };
 
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "lm3alem",
+  name: "Lmaalem",
   url: siteUrl,
-  logo: `${siteUrl}/apple-touch-icon.png`,
+  logo: `${siteUrl}/logo.png`,
   description: siteDescription,
   address: { "@type": "PostalAddress", addressCountry: "MA" },
   contactPoint: {
