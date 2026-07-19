@@ -39,6 +39,7 @@ export function BrandLogo({
           height={size * 2}
           className="h-full w-full object-cover object-center scale-[1.02]"
           priority={priority}
+          sizes={`${size}px`}
         />
       </span>
 

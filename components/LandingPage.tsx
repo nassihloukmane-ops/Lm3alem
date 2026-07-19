@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import {
   LayoutGrid,
   FileText,
@@ -16,12 +17,9 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/ui/Navbar";
 import { HeroPhone } from "@/components/ui/HeroPhone";
-import { DemandeSection } from "@/components/ui/DemandeSection";
 import { StepCard } from "@/components/ui/StepCard";
 import { CategoryCard } from "@/components/ui/CategoryCard";
 import { BrandLogo } from "@/components/ui/BrandLogo";
-import { SiteFooter } from "@/components/ui/SiteFooter";
-import { MobileStickyCta } from "@/components/ui/MobileStickyCta";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -35,6 +33,22 @@ import { useI18n } from "@/components/i18n/LocaleProvider";
 import { AppleLogo, GooglePlayLogo } from "@/components/ui/StoreIcons";
 import { brandName } from "@/lib/brand";
 import { cn } from "@/lib/utils";
+
+/** Chunks différés — même UI, JS chargé plus tard */
+const DemandeSection = dynamic(
+  () =>
+    import("@/components/ui/DemandeSection").then((m) => m.DemandeSection),
+  { ssr: true }
+);
+const SiteFooter = dynamic(
+  () => import("@/components/ui/SiteFooter").then((m) => m.SiteFooter),
+  { ssr: true }
+);
+const MobileStickyCta = dynamic(
+  () =>
+    import("@/components/ui/MobileStickyCta").then((m) => m.MobileStickyCta),
+  { ssr: false }
+);
 
 const CATEGORY_COLORS = [
   "#5C6BC0",
@@ -457,7 +471,7 @@ export function LandingPage() {
       <section
         id="metiers"
         aria-labelledby="metiers-title"
-        className="section-pad bg-surface-muted"
+        className="section-pad bg-surface-muted perf-defer"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInView className="text-center mb-14">
@@ -612,7 +626,7 @@ export function LandingPage() {
       <section
         id="faq"
         aria-labelledby="faq-title"
-        className="section-pad bg-surface-muted"
+        className="section-pad bg-surface-muted perf-defer"
       >
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <FadeInView className="text-center mb-12">

@@ -12,20 +12,29 @@ import "./globals.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
+  weight: ["600", "700"],
   variable: "--font-fraunces",
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-manrope",
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const notoArabic = Noto_Sans_Arabic({
   subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-noto-arabic",
   display: "swap",
+  preload: false,
+  adjustFontFallback: true,
 });
 
 export const viewport: Viewport = {
@@ -162,6 +171,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <link rel="preload" href="/logo.png" as="image" type="image/png" />
       </head>
       <body className="font-sans">
         <ThemeProvider>

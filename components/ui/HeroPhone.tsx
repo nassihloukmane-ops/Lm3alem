@@ -1,11 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "framer-motion";
-import { AppRequestScreen } from "@/components/ui/AppRequestScreen";
 import { TiltSurface } from "@/components/ui/TiltSurface";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { cn } from "@/lib/utils";
+
+const AppRequestScreen = dynamic(
+  () =>
+    import("@/components/ui/AppRequestScreen").then((m) => m.AppRequestScreen),
+  { ssr: false }
+);
 
 type HeroPhoneProps = {
   /** Plus petit (sections secondaires / mobile dense) */

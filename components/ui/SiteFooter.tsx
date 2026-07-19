@@ -77,7 +77,7 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="relative overflow-hidden text-ink-secondary">
+    <footer className="relative overflow-hidden text-ink-secondary perf-defer">
       {/* Fond scénique */}
       <div
         className="absolute inset-0 bg-band mesh-depth"

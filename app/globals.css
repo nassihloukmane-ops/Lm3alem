@@ -257,6 +257,12 @@
     @apply py-14 sm:py-16 lg:py-24;
   }
 
+  /* Accélère le paint hors écran sans changer l’apparence */
+  .perf-defer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 640px;
+  }
+
   .touch-target {
     min-height: 44px;
     min-width: 44px;
