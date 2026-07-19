@@ -293,7 +293,7 @@ export function SiteFooter() {
         {/* Bas de page */}
         <div className="flex flex-col gap-4 border-t border-outline/80 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs sm:text-sm">
-            © {year} Lmaalem —{" "}
+            © {year} lm3alem —{" "}
             <span className="font-arabic" dir="rtl" lang="ar">
               {t.hero.brandAr}
             </span>{" "}

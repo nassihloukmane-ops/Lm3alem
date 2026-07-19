@@ -42,7 +42,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Lmaalem — Services à domicile avec artisans vérifiés",
+    default: "lm3alem — Services à domicile avec artisans vérifiés",
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     "trouver un électricien près de moi",
     "artisans vérifiés",
     "application services maison",
-    "Lmaalem app",
+    "lm3alem app",
     "réserver un professionnel",
     "lm3alem",
     "plombier Maroc",
@@ -79,20 +79,20 @@ export const metadata: Metadata = {
     alternateLocale: ["ar_MA", "en_US"],
     url: siteUrl,
     siteName,
-    title: "Lmaalem — Services à domicile avec artisans vérifiés",
+    title: "lm3alem — Services à domicile avec artisans vérifiés",
     description: siteDescription,
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Lmaalem — Application services à domicile Maroc",
+        alt: "lm3alem — Application services à domicile Maroc",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lmaalem — Services à domicile avec artisans vérifiés",
+    title: "lm3alem — Services à domicile avec artisans vérifiés",
     description: siteDescription,
     images: ["/og-image.svg"],
   },

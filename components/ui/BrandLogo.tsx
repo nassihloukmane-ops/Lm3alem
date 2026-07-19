@@ -1,22 +1,16 @@
 import Image from "next/image";
+import { brandAr, brandName } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
   className?: string;
-  /** Taille visuelle du pictogramme */
   size?: number;
-  /** Afficher le wordmark « Lmaalem » à côté */
   withWordmark?: boolean;
-  /** Variante compacte (footer / mobile) */
   compact?: boolean;
-  /** Priorité de chargement Next/Image (navbar, hero) */
   priority?: boolean;
 };
 
-/**
- * Logo officiel Lmaalem — adapté light & dark.
- * Le pictogramme a un fond sombre intégré : ombre douce + léger anneau pour le mode clair.
- */
+/** Logo officiel lm3alem — adapté light & dark. */
 export function BrandLogo({
   className,
   size = 40,
@@ -25,7 +19,7 @@ export function BrandLogo({
   priority = false,
 }: BrandLogoProps) {
   const wordSize = compact ? "text-lg" : "text-xl";
-  const arabicSize = compact ? "text-[9px]" : "text-[10px]";
+  const arabicSize = compact ? "text-[10px]" : "text-xs";
 
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
@@ -40,7 +34,7 @@ export function BrandLogo({
       >
         <Image
           src="/logo.png"
-          alt="Lmaalem"
+          alt={brandName}
           width={size * 2}
           height={size * 2}
           className="h-full w-full object-cover object-center scale-[1.02]"
@@ -52,20 +46,20 @@ export function BrandLogo({
         <span className="flex flex-col min-w-0 items-start gap-0.5">
           <span
             className={cn(
-              "font-display font-bold leading-tight tracking-tight text-ink",
+              "font-display font-bold leading-tight tracking-tight text-ink lowercase",
               wordSize
             )}
           >
-            Lmaalem
+            {brandName}
           </span>
           <span
             className={cn(
-              "font-arabic leading-snug text-ink-secondary/90 font-medium tracking-wide w-fit",
+              "font-arabic leading-relaxed text-ink-secondary/90 font-medium w-fit",
               arabicSize
             )}
             lang="ar"
           >
-            المعلم
+            {brandAr}
           </span>
         </span>
       )}

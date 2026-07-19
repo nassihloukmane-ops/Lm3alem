@@ -12,7 +12,7 @@ const shadowSoft = "0 6px 20px rgba(28, 25, 23, 0.06)";
 const shadowCard = "0 6px 18px rgba(28, 25, 23, 0.055)";
 
 /**
- * Écran Accueil / Demande Lmaalem — réplique fidèle de la capture.
+ * Écran Accueil / Demande lm3alem — réplique fidèle de la capture.
  * Karim = Électricien · 2.5 km (source : capture).
  */
 export function AppHomeScreen({
@@ -44,7 +44,7 @@ export function AppHomeScreen({
         boxSizing: "border-box",
       }}
       role="img"
-      aria-label="Écran Lmaalem — Nouvelle demande Plombier Casablanca"
+      aria-label="Écran lm3alem — Nouvelle demande Plombier Casablanca"
     >
       {/* Status bar */}
       <div
@@ -121,7 +121,7 @@ export function AppHomeScreen({
             margin: 0,
           }}
         >
-          Lmaalem
+          lm3alem
         </p>
         <p
           style={{

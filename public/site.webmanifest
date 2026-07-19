@@ -1,6 +1,6 @@
 {
-  "name": "Lmaalem — Services à domicile",
-  "short_name": "Lmaalem",
+  "name": "lm3alem — Services à domicile",
+  "short_name": "lm3alem",
   "description": "Trouvez un plombier, électricien ou professionnel vérifié près de chez vous en quelques minutes.",
   "start_url": "/",
   "display": "standalone",

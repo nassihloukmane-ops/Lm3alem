@@ -157,11 +157,11 @@ export const dictionaries: Record<Locale, Dictionary> = {
       closeMenu: "Fermer le menu",
     },
     hero: {
-      brandAr: "المعلم",
+      brandAr: "المْعَلَّم",
       title: "La solution rapide pour vos services à domicile",
       subtitle:
         "Réservez des professionnels vérifiés près de chez vous en quelques minutes.",
-      ctaDownload: "Télécharger Lmaalem",
+      ctaDownload: "Télécharger lm3alem",
       ctaHow: "Voir comment ça marche",
     },
     trust: {
@@ -174,7 +174,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ],
     },
     forWho: {
-      title: "Pour qui est Lmaalem ?",
+      title: "Pour qui est lm3alem ?",
       subtitle:
         "Une app, deux expériences — trouver un expert ou recevoir des missions.",
       clientTitle: "Tu as besoin d’un pro",
@@ -215,7 +215,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     features: {
       title: "Tout pour réserver en confiance",
       subtitle:
-        "De la demande au QR de fin de mission, Lmaalem simplifie chaque étape.",
+        "De la demande au QR de fin de mission, lm3alem simplifie chaque étape.",
       items: [
         {
           title: "Demande en quelques minutes",
@@ -277,7 +277,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           description: "Discute, intervient, valide au QR.",
         },
       ],
-      cta: "Télécharger Lmaalem",
+      cta: "Télécharger lm3alem",
     },
     trades: {
       title: "Les métiers disponibles",
@@ -294,13 +294,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Vitrerie",
       ],
       footer:
-        "Trouver un plombier ou un électricien près de moi n’a jamais été aussi simple. Réservez un professionnel vérifié avec Lmaalem.",
+        "Trouver un plombier ou un électricien près de moi n’a jamais été aussi simple. Réservez un professionnel vérifié avec lm3alem.",
     },
     artisans: {
       title: "Artisans : soyez visibles, soyez choisis",
       text: "Recevez des missions près de chez vous, échangez in-app, et développez votre réputation avec des avis réels. Connexion Google ou Apple disponible.",
       cta: "Devenir artisan",
-      whyTitle: "Pourquoi rejoindre Lmaalem ?",
+      whyTitle: "Pourquoi rejoindre lm3alem ?",
       whyItems: [
         {
           title: "Missions près de chez toi",
@@ -322,13 +322,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       whyCta: "Voir le parcours artisan",
     },
     download: {
-      title: "Télécharge Lmaalem",
+      title: "Télécharge lm3alem",
       subtitle:
         "Disponible sur iOS et Android. Scanne le QR ou choisis ton store.",
       scan: "Scanner pour télécharger",
       available: "Disponible iOS & Android",
-      appStoreAria: "Télécharger Lmaalem sur l'App Store",
-      playAria: "Télécharger Lmaalem sur Google Play",
+      appStoreAria: "Télécharger lm3alem sur l'App Store",
+      playAria: "Télécharger lm3alem sur Google Play",
       appStoreTop: "Télécharger sur",
       appStoreName: "App Store",
       playTop: "Disponible sur",
@@ -336,10 +336,10 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     faq: {
       title: "Questions fréquentes",
-      subtitle: "Tout ce que vous devez savoir sur Lmaalem",
+      subtitle: "Tout ce que vous devez savoir sur lm3alem",
       items: [
         {
-          question: "Lmaalem est-il gratuit ?",
+          question: "lm3alem est-il gratuit ?",
           answer:
             "Oui. Le téléchargement et l'inscription sont gratuits. Vous ne payez que le service de l'artisan que vous choisissez.",
         },
@@ -351,29 +351,29 @@ export const dictionaries: Record<Locale, Dictionary> = {
         {
           question: "Quelles zones sont couvertes ?",
           answer:
-            "Lmaalem se déploie progressivement au Maroc. Les disponibilités près de chez vous s'affichent directement dans l'application.",
+            "lm3alem se déploie progressivement au Maroc. Les disponibilités près de chez vous s'affichent directement dans l'application.",
         },
         {
-          question: "Comment devenir artisan sur Lmaalem ?",
+          question: "Comment devenir artisan sur lm3alem ?",
           answer:
             "Téléchargez l'app, inscrivez-vous en tant que professionnel, complétez votre profil et la vérification, puis recevez des missions près de chez vous.",
         },
         {
           question: "Puis-je discuter avec l'artisan avant la mission ?",
           answer:
-            "Oui. Le chat in-app et les appels vous permettent de coordonner la mission sans quitter Lmaalem.",
+            "Oui. Le chat in-app et les appels vous permettent de coordonner la mission sans quitter lm3alem.",
         },
         {
           question: "L'application est-elle disponible en arabe ?",
           answer:
-            "Oui. Lmaalem est disponible en français, en arabe (interface RTL) et en anglais.",
+            "Oui. lm3alem est disponible en français, en arabe (interface RTL) et en anglais.",
         },
       ],
     },
     footer: {
       ctaTitle: "Prêt à trouver ton artisan ?",
       ctaText:
-        "Télécharge Lmaalem et réserve un pro vérifié près de chez toi en quelques minutes.",
+        "Télécharge lm3alem et réserve un pro vérifié près de chez toi en quelques minutes.",
       ctaDownload: "Télécharger l'app",
       ctaArtisan: "Devenir artisan",
       tagline:
@@ -386,12 +386,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       privacy: "Confidentialité",
       terms: "CGU",
       contact: "Contact",
-      arabicTag: "المعلم — خدمات منزلية موثوقة",
+      arabicTag: "المْعَلَّم — خدمات منزلية موثوقة",
       rights: "Tous droits réservés",
       madeFor: "Fait pour le Maroc",
     },
     phone: {
-      aria: "Écran Lmaalem — Créer une demande",
+      aria: "Écran lm3alem — Créer une demande",
       header: "Trouvez l'artisan qu'il vous faut",
       categoriesTitle: "Catégories",
       descTitle: "Description",
@@ -419,11 +419,11 @@ export const dictionaries: Record<Locale, Dictionary> = {
       closeMenu: "Close menu",
     },
     hero: {
-      brandAr: "المعلم",
+      brandAr: "المْعَلَّم",
       title: "The fast way to book home services",
       subtitle:
         "Book verified professionals near you in just a few minutes.",
-      ctaDownload: "Download Lmaalem",
+      ctaDownload: "Download lm3alem",
       ctaHow: "See how it works",
     },
     trust: {
@@ -436,7 +436,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ],
     },
     forWho: {
-      title: "Who is Lmaalem for?",
+      title: "Who is lm3alem for?",
       subtitle:
         "One app, two experiences — find an expert or receive jobs.",
       clientTitle: "You need a pro",
@@ -477,7 +477,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     features: {
       title: "Everything to book with confidence",
       subtitle:
-        "From request to end-of-job QR, Lmaalem simplifies every step.",
+        "From request to end-of-job QR, lm3alem simplifies every step.",
       items: [
         {
           title: "Request in minutes",
@@ -538,7 +538,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           description: "Chat, work, validate with QR.",
         },
       ],
-      cta: "Download Lmaalem",
+      cta: "Download lm3alem",
     },
     trades: {
       title: "Available trades",
@@ -555,13 +555,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Glazier",
       ],
       footer:
-        "Finding a plumber or electrician near you has never been easier. Book a verified pro with Lmaalem.",
+        "Finding a plumber or electrician near you has never been easier. Book a verified pro with lm3alem.",
     },
     artisans: {
       title: "Pros: get seen, get chosen",
       text: "Receive nearby jobs, chat in-app, and grow your reputation with real reviews. Google or Apple sign-in available.",
       cta: "Become a pro",
-      whyTitle: "Why join Lmaalem?",
+      whyTitle: "Why join lm3alem?",
       whyItems: [
         {
           title: "Jobs near you",
@@ -583,12 +583,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       whyCta: "See the pro journey",
     },
     download: {
-      title: "Download Lmaalem",
+      title: "Download lm3alem",
       subtitle: "Available on iOS and Android. Scan the QR or pick your store.",
       scan: "Scan to download",
       available: "Available on iOS & Android",
-      appStoreAria: "Download Lmaalem on the App Store",
-      playAria: "Download Lmaalem on Google Play",
+      appStoreAria: "Download lm3alem on the App Store",
+      playAria: "Download lm3alem on Google Play",
       appStoreTop: "Download on the",
       appStoreName: "App Store",
       playTop: "Get it on",
@@ -596,10 +596,10 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     faq: {
       title: "Frequently asked questions",
-      subtitle: "Everything you need to know about Lmaalem",
+      subtitle: "Everything you need to know about lm3alem",
       items: [
         {
-          question: "Is Lmaalem free?",
+          question: "Is lm3alem free?",
           answer:
             "Yes. Download and signup are free. You only pay the artisan you choose.",
         },
@@ -611,29 +611,29 @@ export const dictionaries: Record<Locale, Dictionary> = {
         {
           question: "Which areas are covered?",
           answer:
-            "Lmaalem is rolling out across Morocco. Availability near you shows directly in the app.",
+            "lm3alem is rolling out across Morocco. Availability near you shows directly in the app.",
         },
         {
-          question: "How do I become a pro on Lmaalem?",
+          question: "How do I become a pro on lm3alem?",
           answer:
             "Download the app, sign up as a professional, complete your profile and verification, then receive jobs near you.",
         },
         {
           question: "Can I talk to the artisan before the job?",
           answer:
-            "Yes. In-app chat and calls let you coordinate without leaving Lmaalem.",
+            "Yes. In-app chat and calls let you coordinate without leaving lm3alem.",
         },
         {
           question: "Is the app available in Arabic?",
           answer:
-            "Yes. Lmaalem is available in French, Arabic (RTL) and English.",
+            "Yes. lm3alem is available in French, Arabic (RTL) and English.",
         },
       ],
     },
     footer: {
       ctaTitle: "Ready to find your artisan?",
       ctaText:
-        "Download Lmaalem and book a verified pro near you in minutes.",
+        "Download lm3alem and book a verified pro near you in minutes.",
       ctaDownload: "Download the app",
       ctaArtisan: "Become a pro",
       tagline:
@@ -646,12 +646,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       privacy: "Privacy",
       terms: "Terms",
       contact: "Contact",
-      arabicTag: "المعلم — خدمات منزلية موثوقة",
+      arabicTag: "المْعَلَّم — خدمات منزلية موثوقة",
       rights: "All rights reserved",
       madeFor: "Made for Morocco",
     },
     phone: {
-      aria: "Lmaalem screen — Create a request",
+      aria: "lm3alem screen — Create a request",
       header: "Find the artisan you need",
       categoriesTitle: "Categories",
       descTitle: "Description",
@@ -679,11 +679,11 @@ export const dictionaries: Record<Locale, Dictionary> = {
       closeMenu: "إغلاق القائمة",
     },
     hero: {
-      brandAr: "المعلم",
+      brandAr: "المْعَلَّم",
       title: "الحل السريع لخدماتك المنزلية",
       subtitle:
         "احجز محترفين موثقين بالقرب منك في بضع دقائق.",
-      ctaDownload: "تحميل المعلم",
+      ctaDownload: "تحميل المْعَلَّم",
       ctaHow: "شاهد كيف يعمل",
     },
     trust: {
@@ -696,7 +696,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ],
     },
     forWho: {
-      title: "لمن تطبيق المعلم؟",
+      title: "لمن تطبيق المْعَلَّم؟",
       subtitle: "تطبيق واحد، تجربتان — ابحث عن خبير أو استقبل مهامًا.",
       clientTitle: "تحتاج إلى محترف",
       clientText:
@@ -736,7 +736,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     features: {
       title: "كل ما تحتاجه للحجز بثقة",
       subtitle:
-        "من الطلب إلى رمز QR لنهاية المهمة، المعلم يبسّط كل خطوة.",
+        "من الطلب إلى رمز QR لنهاية المهمة، المْعَلَّم يبسّط كل خطوة.",
       items: [
         {
           title: "طلب في دقائق",
@@ -797,7 +797,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           description: "تواصل، تدخّل، أكّد بـ QR.",
         },
       ],
-      cta: "تحميل المعلم",
+      cta: "تحميل المْعَلَّم",
     },
     trades: {
       title: "الحرف المتوفرة",
@@ -814,13 +814,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "زجاج",
       ],
       footer:
-        "البحث عن سباك أو كهربائي بالقرب منك لم يكن أسهل. احجز محترفًا موثقًا مع المعلم.",
+        "البحث عن سباك أو كهربائي بالقرب منك لم يكن أسهل. احجز محترفًا موثقًا مع المْعَلَّم.",
     },
     artisans: {
       title: "للحرفيين: كونوا مرئيين ومختارين",
       text: "استقبلوا مهامًا بالقرب منكم، تواصلوا داخل التطبيق، وطوروا سمعتكم بآراء حقيقية. تسجيل عبر Google أو Apple متاح.",
       cta: "انضم كحرفي",
-      whyTitle: "لماذا تنضم إلى المعلم؟",
+      whyTitle: "لماذا تنضم إلى المْعَلَّم؟",
       whyItems: [
         {
           title: "مهام بالقرب منك",
@@ -842,12 +842,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       whyCta: "شاهد مسار الحرفي",
     },
     download: {
-      title: "حمّل المعلم",
+      title: "حمّل المْعَلَّم",
       subtitle: "متوفر على iOS وAndroid. امسح رمز QR أو اختر متجرك.",
       scan: "امسح للتحميل",
       available: "متوفر على iOS وAndroid",
-      appStoreAria: "تحميل المعلم من App Store",
-      playAria: "تحميل المعلم من Google Play",
+      appStoreAria: "تحميل المْعَلَّم من App Store",
+      playAria: "تحميل المْعَلَّم من Google Play",
       appStoreTop: "تحميل من",
       appStoreName: "App Store",
       playTop: "متوفر على",
@@ -855,10 +855,10 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     faq: {
       title: "الأسئلة الشائعة",
-      subtitle: "كل ما تحتاج معرفته عن المعلم",
+      subtitle: "كل ما تحتاج معرفته عن المْعَلَّم",
       items: [
         {
-          question: "هل المعلم مجاني؟",
+          question: "هل المْعَلَّم مجاني؟",
           answer:
             "نعم. التحميل والتسجيل مجانيان. تدفع فقط مقابل خدمة الحرفي الذي تختاره.",
         },
@@ -870,29 +870,29 @@ export const dictionaries: Record<Locale, Dictionary> = {
         {
           question: "ما هي المناطق المغطاة؟",
           answer:
-            "ينتشر المعلم تدريجيًا في المغرب. التوفر بالقرب منك يظهر مباشرة في التطبيق.",
+            "ينتشر المْعَلَّم تدريجيًا في المغرب. التوفر بالقرب منك يظهر مباشرة في التطبيق.",
         },
         {
-          question: "كيف أصبح حرفيًا على المعلم؟",
+          question: "كيف أصبح حرفيًا على المْعَلَّم؟",
           answer:
             "حمّل التطبيق، سجّل كمحترف، أكمل ملفك والتحقق، ثم استقبل مهامًا بالقرب منك.",
         },
         {
           question: "هل يمكنني التحدث مع الحرفي قبل المهمة؟",
           answer:
-            "نعم. الدردشة والمكالمات داخل التطبيق تسمحان بالتنسيق دون مغادرة المعلم.",
+            "نعم. الدردشة والمكالمات داخل التطبيق تسمحان بالتنسيق دون مغادرة المْعَلَّم.",
         },
         {
           question: "هل التطبيق متوفر بالعربية؟",
           answer:
-            "نعم. المعلم متوفر بالفرنسية والعربية (واجهة RTL) والإنجليزية.",
+            "نعم. المْعَلَّم متوفر بالفرنسية والعربية (واجهة RTL) والإنجليزية.",
         },
       ],
     },
     footer: {
       ctaTitle: "جاهز لإيجاد حرفيك؟",
       ctaText:
-        "حمّل المعلم واحجز محترفًا موثقًا بالقرب منك في دقائق.",
+        "حمّل المْعَلَّم واحجز محترفًا موثقًا بالقرب منك في دقائق.",
       ctaDownload: "تحميل التطبيق",
       ctaArtisan: "انضم كحرفي",
       tagline:
@@ -905,12 +905,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       privacy: "الخصوصية",
       terms: "الشروط",
       contact: "اتصل بنا",
-      arabicTag: "المعلم — خدمات منزلية موثوقة",
+      arabicTag: "المْعَلَّم — خدمات منزلية موثوقة",
       rights: "جميع الحقوق محفوظة",
       madeFor: "صُنع للمغرب",
     },
     phone: {
-      aria: "شاشة المعلم — إنشاء طلب",
+      aria: "شاشة المْعَلَّم — إنشاء طلب",
       header: "اعثر على الحرفي الذي تحتاجه",
       categoriesTitle: "الفئات",
       descTitle: "الوصف",

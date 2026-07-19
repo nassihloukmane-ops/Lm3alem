@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { useI18n } from "@/components/i18n/LocaleProvider";
+import { brandName } from "@/lib/brand";
 import { localeMeta, type Locale } from "@/lib/i18n/dictionaries";
 import { cn } from "@/lib/utils";
 
@@ -72,7 +73,7 @@ export function Navbar() {
       >
         <a
           href="#accueil"
-          aria-label={`Lmaalem – ${t.nav.home}`}
+          aria-label={`${brandName} – ${t.nav.home}`}
           className="shrink-0"
           onClick={() => setMobileOpen(false)}
         >

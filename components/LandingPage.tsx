@@ -33,6 +33,7 @@ import { FadeIn, FadeInView, Reveal3D, Stagger, StaggerItem } from "@/components
 import { TiltSurface } from "@/components/ui/TiltSurface";
 import { useI18n } from "@/components/i18n/LocaleProvider";
 import { AppleLogo, GooglePlayLogo } from "@/components/ui/StoreIcons";
+import { brandName } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 const CATEGORY_COLORS = [
@@ -114,7 +115,7 @@ export function LandingPage() {
   const categories = t.trades.names.map((name, i) => ({
     name,
     color: CATEGORY_COLORS[i] ?? CATEGORY_COLORS[0],
-    alt: `${name} — Lmaalem`,
+    alt: `${name} — lm3alem`,
   }));
 
   const features = FEATURE_ICONS.map((icon, i) => ({
@@ -176,11 +177,11 @@ export function LandingPage() {
                 <BrandLogo size={48} withWordmark={false} priority />
               </div>
               <div className="mb-4 sm:mb-6 flex flex-col items-center lg:items-start gap-1">
-                <p className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-ink tracking-tight">
-                  Lmaalem
+                <p className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-ink tracking-tight lowercase">
+                  {brandName}
                 </p>
                 <p
-                  className="font-arabic text-base sm:text-lg text-ink-secondary/90 font-medium tracking-wide w-fit"
+                  className="font-arabic text-lg sm:text-xl text-ink-secondary/90 font-medium w-fit leading-relaxed"
                   lang="ar"
                 >
                   {t.hero.brandAr}
