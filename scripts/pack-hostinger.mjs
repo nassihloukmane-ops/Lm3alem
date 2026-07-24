@@ -1,9 +1,21 @@
 /**
  * Prépare out/ pour Hostinger :
  * - renomme _next → next (Hostinger renvoie souvent 404 sur les dossiers _*)
- * - recrée un zip avec chemins Unix
+ * - patch les URLs /_next/ → /next/
+ * - zip optionnel (tar Windows)
  */
-import { readdir, readFile, writeFile, rename, rm, copyFile, stat } from "node:fs/promises";
+import {
+  readdir,
+  readFile,
+  writeFile,
+  rename,
+  rm,
+  cp,
+  copyFile,
+  stat,
+  access,
+} from "node:fs/promises";
+import { constants } from "node:fs";
 import { join, extname } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -23,6 +35,15 @@ const textExt = new Set([
   ".map",
 ]);
 
+async function exists(path) {
+  try {
+    await access(path, constants.F_OK);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
@@ -34,6 +55,18 @@ async function walk(dir) {
   return files;
 }
 
+/** Windows/OneDrive : rename de dossier échoue souvent → fallback copy+delete */
+async function moveDir(from, to) {
+  await rm(to, { recursive: true, force: true });
+  try {
+    await rename(from, to);
+  } catch (err) {
+    console.warn(`rename échoué (${err.code || err.message}), fallback cp+rm…`);
+    await cp(from, to, { recursive: true });
+    await rm(from, { recursive: true, force: true });
+  }
+}
+
 async function main() {
   await stat(join(outDir, "index.html"));
 
@@ -41,14 +74,14 @@ async function main() {
 
   const nextDir = join(outDir, "_next");
   const renamed = join(outDir, "next");
-  try {
-    await stat(nextDir);
-    await rm(renamed, { recursive: true, force: true });
-    await rename(nextDir, renamed);
+
+  if (await exists(nextDir)) {
+    await moveDir(nextDir, renamed);
     console.log("Renamed out/_next → out/next");
-  } catch {
-    await stat(renamed);
+  } else if (await exists(renamed)) {
     console.log("out/next already present");
+  } else {
+    throw new Error("Ni out/_next ni out/next après le build Next.js");
   }
 
   const files = await walk(outDir);
@@ -63,10 +96,14 @@ async function main() {
   console.log(`Patched ${patched} files (/_next/ → /next/)`);
 
   await rm(zipPath, { force: true });
-  execFileSync("tar", ["-a", "-c", "-f", zipPath, "-C", outDir, "."], {
-    stdio: "inherit",
-  });
-  console.log(`Created ${zipPath}`);
+  try {
+    execFileSync("tar", ["-a", "-c", "-f", zipPath, "-C", outDir, "."], {
+      stdio: "inherit",
+    });
+    console.log(`Created ${zipPath}`);
+  } catch {
+    console.warn("Zip ignoré (tar indisponible) — out/ est prêt pour scp.");
+  }
 }
 
 main().catch((err) => {

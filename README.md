@@ -4,57 +4,61 @@ Site Next.js (export statique) — https://lm3alem.com
 
 ## Repo GitHub
 
-Déjà lié à : [nassihloukmane-ops/Lm3alem](https://github.com/nassihloukmane-ops/Lm3alem)
+[nassihloukmane-ops/Lm3alem](https://github.com/nassihloukmane-ops/Lm3alem)
 
 ```bash
-# En local (Windows)
 git add .
 git commit -m "message"
 git push origin main
 ```
 
-## Déploiement Hostinger (recommandé)
+## Déploiement (Hostinger sans Node en SSH)
 
-`git pull` seul ne met **pas** le site à jour : il faut **rebuild** `out/` puis publier.
+Sur ton serveur, `node` n’est pas dans le PATH SSH — c’est normal.  
+**Build sur ton PC**, puis upload :
 
-### Une fois (configuration serveur)
-
-En SSH Hostinger :
-
-```bash
-cd ~/Lm3alem   # ou le chemin réel du clone
-
-# Chemin typique Hostinger — adapte si besoin :
-export PUBLIC_HTML="$HOME/domains/lm3alem.com/public_html"
-echo 'export PUBLIC_HTML="$HOME/domains/lm3alem.com/public_html"' >> ~/.bashrc
+```powershell
+npm run deploy:remote
 ```
 
-Si tu utilises **Node.js Hostinger** (`app.js` sert `out/`), tu n’as **pas** besoin de `PUBLIC_HTML` : le build suffit, puis redémarre l’app dans hPanel.
+Ça lance : `build:hostinger` → `scp` vers `~/domains/lm3alem.com/public_html/`
 
-### À chaque mise en ligne
+Paramètres SSH (déjà préremplis d’après ton accès) :
+
+| Variable | Défaut |
+|----------|--------|
+| `HOSTINGER_HOST` | `82.25.113.135` |
+| `HOSTINGER_USER` | `u468433973` |
+| `HOSTINGER_PORT` | `65002` |
+| `HOSTINGER_PUBLIC_HTML` | `domains/lm3alem.com/public_html` |
+
+Si le chemin `public_html` est différent, en SSH :
+
+```bash
+ls ~/domains/
+```
+
+puis :
+
+```powershell
+$env:HOSTINGER_PUBLIC_HTML = "domains/TON-DOMAINE/public_html"
+npm run deploy:remote
+```
+
+## Si tu actives Node.js dans hPanel
+
+Alors le script serveur fonctionne :
 
 ```bash
 cd ~/Lm3alem
+export PUBLIC_HTML="$HOME/domains/lm3alem.com/public_html"
 bash scripts/deploy.sh
 ```
 
-Ce script fait : `git pull` → `npm ci` → `npm run build:hostinger` → sync vers `PUBLIC_HTML` (si défini).
-
-### Workflow quotidien
-
-1. Tu codes en local → `git push origin main`
-2. Sur le serveur → `bash scripts/deploy.sh`
-3. Le site https://lm3alem.com est à jour
-
-## Scripts npm
+## Scripts
 
 | Commande | Rôle |
 |----------|------|
-| `npm run dev` | Dev local |
-| `npm run build` | Build Next (`out/`) |
-| `npm run build:hostinger` | Build + rename `_next`→`next` + zip |
-| `bash scripts/deploy.sh` | Pull GitHub + build + publish Hostinger |
-
-## CI GitHub
-
-À chaque push sur `main`, GitHub Actions vérifie que le build Hostinger réussit (`.github/workflows/ci.yml`).
+| `npm run deploy:remote` | **Recommandé** — build PC + upload SSH |
+| `npm run build:hostinger` | Build seul (`out/` + zip) |
+| `bash scripts/deploy.sh` | Pull + build + publish (nécessite Node serveur) |

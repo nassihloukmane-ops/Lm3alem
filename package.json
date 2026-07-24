@@ -12,6 +12,7 @@
     "pack:hostinger": "node scripts/pack-hostinger.mjs",
     "build:hostinger": "next build && node scripts/pack-hostinger.mjs",
     "deploy": "bash scripts/deploy.sh",
+    "deploy:remote": "powershell -ExecutionPolicy Bypass -File scripts/deploy-remote.ps1",
     "start": "node app.js",
     "favicons": "node scripts/generate-favicons.mjs",
     "lint": "next lint"
