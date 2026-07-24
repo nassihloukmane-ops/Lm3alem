@@ -37,6 +37,8 @@ const notoArabic = Noto_Sans_Arabic({
   adjustFontFallback: true,
 });
 
+const defaultTitle = "lm3alem — Services à domicile avec artisans vérifiés";
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -46,15 +48,17 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#FFFBF7" },
     { media: "(prefers-color-scheme: dark)", color: "#020617" },
   ],
+  colorScheme: "light dark",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "lm3alem — Services à domicile avec artisans vérifiés",
+    default: defaultTitle,
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
+  applicationName: siteName,
   keywords: [
     "services à domicile Maroc",
     "trouver un plombier près de moi",
@@ -73,6 +77,12 @@ export const metadata: Metadata = {
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
+  category: "services",
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
   alternates: {
     canonical: "/",
     languages: {
@@ -86,24 +96,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_MA",
     alternateLocale: ["ar_MA", "en_US"],
-    url: siteUrl,
+    url: "/",
     siteName,
-    title: "lm3alem — Services à domicile avec artisans vérifiés",
+    title: defaultTitle,
     description: siteDescription,
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "lm3alem — Application services à domicile Maroc",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "lm3alem — Services à domicile avec artisans vérifiés",
+    title: defaultTitle,
     description: siteDescription,
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -113,17 +124,28 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "48x48" },
-      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
       { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/logo.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
     shortcut: "/favicon.ico",
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/favicon.svg",
+      },
+    ],
   },
   manifest: "/site.webmanifest",
   ...(googleSiteVerification

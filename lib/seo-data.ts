@@ -33,15 +33,20 @@ export const faqItems = [
   },
 ] as const;
 
+/** Schema.org WebSite — URL canonique https://lm3alem.com */
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "lm3alem",
-  alternateName: ["lm3alem", "المْعَلَّم", "Lm3alem"],
   url: siteUrl,
   description: siteDescription,
   inLanguage: ["fr-MA", "ar-MA", "en"],
-};
+  publisher: {
+    "@type": "Organization",
+    name: "lm3alem",
+    url: siteUrl,
+  },
+} as const;
 
 export const mobileApplicationSchema = {
   "@context": "https://schema.org",
@@ -53,26 +58,42 @@ export const mobileApplicationSchema = {
   offers: { "@type": "Offer", price: "0", priceCurrency: "MAD" },
   url: siteUrl,
   inLanguage: ["fr", "ar", "en"],
-};
+} as const;
 
+/**
+ * Schema.org Organization — logo officiel pour les résultats enrichis Google.
+ * logo.png doit rester accessible en HTTPS à la racine (min. 112×112, carré).
+ */
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "lm3alem",
   url: siteUrl,
-  logo: `${siteUrl}/logo.png`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteUrl}/logo.png`,
+    contentUrl: `${siteUrl}/logo.png`,
+    width: 1024,
+    height: 1024,
+    caption: "lm3alem",
+  },
+  image: `${siteUrl}/logo.png`,
   description: siteDescription,
-  address: { "@type": "PostalAddress", addressCountry: "MA" },
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "MA",
+  },
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
     email: "contact@lm3alem.com",
+    availableLanguage: ["French", "Arabic", "English"],
   },
   sameAs: [
     "https://www.facebook.com/lm3alem",
     "https://www.instagram.com/lm3alem",
   ],
-};
+} as const;
 
 export function getFaqSchema() {
   return {
@@ -86,5 +107,5 @@ export function getFaqSchema() {
         text: item.answer,
       },
     })),
-  };
+  } as const;
 }

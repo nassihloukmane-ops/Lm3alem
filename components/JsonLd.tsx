@@ -1,27 +1,2 @@
-import {
-  getFaqSchema,
-  mobileApplicationSchema,
-  organizationSchema,
-  websiteSchema,
-} from "@/lib/seo-data";
-
-export function JsonLd() {
-  const schemas = [
-    websiteSchema,
-    mobileApplicationSchema,
-    organizationSchema,
-    getFaqSchema(),
-  ];
-
-  return (
-    <>
-      {schemas.map((schema) => (
-        <script
-          key={schema["@type"]}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
-    </>
-  );
-}
+/** @deprecated Utiliser `Seo` depuis `@/components/seo/Seo` */
+export { Seo as JsonLd } from "@/components/seo/Seo";

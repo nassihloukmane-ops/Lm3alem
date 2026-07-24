@@ -175,14 +175,14 @@ export function SiteFooter() {
                     <span>{t.footer.location}</span>
                   </div>
                   <a
-                    href="mailto:contact@lmaalem.ma"
+                    href="mailto:contact@lm3alem.com"
                     className="flex items-center gap-2 rounded-12 border border-outline bg-surface/70 px-3 py-2 text-sm hover:border-primary hover:text-primary transition-colors max-w-fit"
                   >
                     <Mail
                       className="h-4 w-4 text-primary shrink-0"
                       aria-hidden
                     />
-                    contact@lmaalem.ma
+                    contact@lm3alem.com
                   </a>
                 </div>
 
