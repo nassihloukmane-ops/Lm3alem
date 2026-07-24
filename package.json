@@ -11,6 +11,7 @@
     "build": "next build",
     "pack:hostinger": "node scripts/pack-hostinger.mjs",
     "build:hostinger": "next build && node scripts/pack-hostinger.mjs",
+    "deploy": "bash scripts/deploy.sh",
     "start": "node app.js",
     "favicons": "node scripts/generate-favicons.mjs",
     "lint": "next lint"

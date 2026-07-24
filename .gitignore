@@ -15,6 +15,7 @@
 
 # production
 /build
+lm3alem-public_html.zip
 
 # misc
 .DS_Store
